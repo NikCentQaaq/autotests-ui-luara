@@ -1,5 +1,5 @@
 from enum import StrEnum
-from typing import Self
+from typing import Self, Any
 
 from pydantic import HttpUrl, DirectoryPath, FilePath
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -25,7 +25,7 @@ class Settings(BaseSettings):
 
     base_url: HttpUrl
     headless: bool
-    browser: list[Browser]
+    browsers: list[Browser]
 
     videos_dir: DirectoryPath
     tracing_dir: DirectoryPath
@@ -57,6 +57,9 @@ class Settings(BaseSettings):
             allure_results_dir=allure_results_dir,
             browser_state_file=browser_state_file
         )
+
+    def get_base_url(self) -> str:
+        return f'{self.base_url}'
 
 
 settings = Settings.setup()

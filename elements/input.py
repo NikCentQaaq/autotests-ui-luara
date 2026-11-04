@@ -18,7 +18,7 @@ class Input(BaseElement):
         step = f'Ввод значения {value} в {self.type_of} "{self.name}" '
 
         with allure.step(step):
-            locator = self.get_locator_test_id(nth)
+            locator = self.get_locator(nth)
             logger.info(step)
 
             locator.fill(value)
@@ -28,7 +28,7 @@ class Input(BaseElement):
         step = f'Ввод значения {value} в {self.type_of} "{self.name}" '
 
         with allure.step(step):
-            locator = self.get_locator_test_id(nth).locator('input')
+            locator = self.get_locator(nth).locator('input')
             logger.info(step)
 
             locator.fill(value)
@@ -38,7 +38,7 @@ class Input(BaseElement):
         step = f'Проверка, что {self.type_of} "{self.name}" имеет значение {value}'
 
         with allure.step(step):
-            locator = self.get_locator_test_id(nth)
+            locator = self.get_locator(nth)
             logger.info(step)
 
             expect(locator).to_have_value(value)

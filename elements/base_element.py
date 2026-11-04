@@ -7,8 +7,7 @@ logger = get_logger('BASE_ELEMENT')
 
 
 class BaseElement:
-    def __init__(self, page: Page, locator: str, name: str):
-        self.page = page
+    def __init__(self, locator: Locator, name: str):
         self.locator = locator
         self.name = name
 
@@ -17,14 +16,18 @@ class BaseElement:
         return self.__class__.__name__
 
 
-    def get_locator_test_id(self, nth: int=0) -> Locator:
+    def get_locator(self, nth: int = 0) -> Locator:
+        """
+        Возвращает Locator с указанным индексом.
+        """
 
-        step = f'Получение локатора "data-test-id"="{self.locator}" с индексом "{nth}"'
+        step = f'Получение локатора элемента "{self.name}" с индексом "{nth}"'
 
         with allure.step(step):
             logger.info(step)
+            return self.locator.nth(nth)
 
-            return self.page.get_by_test_id(self.locator).nth(nth)
+
 
 
 
@@ -35,7 +38,7 @@ class BaseElement:
 
         with allure.step(step):
 
-            locator = self.get_locator_test_id(nth)
+            locator = self.get_locator(nth)
             logger.info(step)
 
             locator.click()
@@ -47,7 +50,7 @@ class BaseElement:
 
         with allure.step(step):
 
-             locator = self.get_locator_test_id(nth)
+             locator = self.get_locator(nth)
              logger.info(step)
 
              expect(locator).to_be_visible()
@@ -59,7 +62,7 @@ class BaseElement:
 
         with allure.step(step):
 
-            locator = self.get_locator_test_id(nth)
+            locator = self.get_locator(nth)
             logger.info(step)
 
             expect(locator).to_have_text(text)
@@ -71,10 +74,14 @@ class BaseElement:
         step = f'Проверка, что {self.type_of} "{self.name}" содержит текст "{text}"'
 
         with allure.step(step):
-            locator = self.get_locator_test_id(nth)
+            locator = self.get_locator(nth)
             logger.info(step)
 
-            expect(locator).to_be_contain(text)
+            expect(locator).to_contain_text(text)
+
+
+
+
 
 
 

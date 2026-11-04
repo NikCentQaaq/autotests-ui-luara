@@ -1,3 +1,5 @@
+import allure
+
 from components.base_component import BaseComponent
 from elements.button import Button
 
@@ -11,3 +13,9 @@ class HelpMenuComponent(BaseComponent):
         # self.faq = Link(...)
         # self.booking = Link(...)
         # self.gift = Link(...)
+
+
+    @allure.step('Проверка видимости Меню "Помощь"')
+    def check_elements(self):
+        self.trigger.check_visible()
+        self.trigger.check_have_text('Помощь')

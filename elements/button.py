@@ -13,7 +13,7 @@ class Button(BaseElement):
         step = f'Проверка, что {self.type_of} "{self.name}" активен'
 
         with allure.step(step):
-            locator = self.get_locator_test_id(nth)
+            locator = self.get_locator(nth)
             logger.info(step)
 
             expect(locator).to_be_enabled()
@@ -23,10 +23,10 @@ class Button(BaseElement):
         step = f'Проверка, что {self.type_of} "{self.name}" неактивен'
 
         with allure.step(step):
-            locator = self.get_locator_test_id(nth)
+            locator = self.get_locator(nth)
             logger.info(step)
 
             expect(locator).to_be_disabled()
 
-        
+
 
