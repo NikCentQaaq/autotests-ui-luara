@@ -15,10 +15,20 @@ class Input(BaseElement):
 
 
     def fill(self, value: str | int, nth: int=0):
-        step = f'Заполняем {self.type_of} "{self.name}" значением {value}'
+        step = f'Ввод значения {value} в {self.type_of} "{self.name}" '
 
         with allure.step(step):
             locator = self.get_locator_test_id(nth)
+            logger.info(step)
+
+            locator.fill(value)
+
+
+    def fill_locator_input(self, value: str | int, nth: int=0):
+        step = f'Ввод значения {value} в {self.type_of} "{self.name}" '
+
+        with allure.step(step):
+            locator = self.get_locator_test_id(nth).locator('input')
             logger.info(step)
 
             locator.fill(value)
