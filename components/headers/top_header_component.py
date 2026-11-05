@@ -29,13 +29,13 @@ class TopHeaderComponent(BaseComponent):
         self.phone.check_visible()
         self.phone.check_have_text('8 (800) 333-81-17')
 
-        self.check_element(self.promo)
-        self.check_element(self.delivery)
-        self.check_element(self.shops)
-        self.check_element(self.certificate)
-        self.check_element(self.conditions)
-        self.check_element(self.contacts)
-        self.check_element(self.vacancies)
+        self.check_element_text_by_name(self.promo)
+        self.check_element_text_by_name(self.delivery)
+        self.check_element_text_by_name(self.shops)
+        self.check_element_text_by_name(self.certificate)
+        self.check_element_text_by_name(self.conditions)
+        self.check_element_text_by_name(self.contacts)
+        self.check_element_text_by_name(self.vacancies)
 
 
 

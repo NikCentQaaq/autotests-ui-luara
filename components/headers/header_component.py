@@ -1,13 +1,9 @@
 import allure
 from playwright.sync_api import Page
 from components.base_component import BaseComponent
-from components.navigation.middle_header_component import MiddleHeaderComponent
-from components.navigation.navbar_component import NavbarComponent
-from components.navigation.top_header_component import TopHeaderComponent
-from elements.input import Input
-from elements.link import Link
-
-
+from components.headers.middle_header_component import MiddleHeaderComponent
+from components.headers.top_header_component import TopHeaderComponent
+from components.headers.top_panel_component import TopPanelComponent
 
 
 class HeaderComponent(BaseComponent):
@@ -16,12 +12,14 @@ class HeaderComponent(BaseComponent):
 
         self.top_header = TopHeaderComponent(page)
         self.middle_header = MiddleHeaderComponent(page)
+        self.top_panel = TopPanelComponent(page)
 
 
     @allure.step('Проверка компонентов Header')
     def check_elements(self):
         self.top_header.check_elements()
         self.middle_header.check_elements()
+        self.top_panel.check_elements()
 
 
 

@@ -29,12 +29,12 @@ class MiddleHeaderComponent(BaseComponent):
         self.logo.check_visible()
         self.search_input.check_visible()
 
-        self.check_element(self.catalog_button)
-        self.check_element(self.search_button)
-        self.check_element(self.login)
-        self.check_element(self.orders)
-        self.check_element(self.favorites)
-        self.check_element(self.cart)
+        self.check_element_text_by_name(self.catalog_button)
+        self.check_element_text_by_name(self.search_button)
+        self.check_element_text_by_name(self.login)
+        self.check_element_text_by_name(self.orders)
+        self.check_element_text_by_name(self.favorites)
+        self.check_element_text_by_name(self.cart)
 
 
 

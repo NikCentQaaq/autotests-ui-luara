@@ -20,11 +20,20 @@ class BaseComponent:
             expect(self.page).to_have_url(expected_url)
 
     @staticmethod
-    def check_element(element: BaseElement):
+    def check_element_text_by_name(element: BaseElement):
         step = f'Проверка {element.type_of} "{element.name}"'
         with allure.step(step):
             element.check_visible()
             element.check_have_text(element.name)
+
+
+    @staticmethod
+    def check_element(element: BaseElement, text: str):
+        step = f'Проверка {element.type_of} "{element.name}"'
+        with allure.step(step):
+            element.check_visible()
+            element.check_have_text(text)
+
 
 
 
