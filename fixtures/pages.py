@@ -18,3 +18,6 @@ def catalog_page(page: Page) -> CatalogPage:
 @pytest.fixture
 def product_page(page: Page) -> ProductPage:
     return ProductPage(page=page)
+
+
+# com
