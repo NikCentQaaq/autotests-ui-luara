@@ -9,7 +9,9 @@ from pages.base_page import BasePage
 from tools.enums.category import Category
 
 
+
 class ProductPage(BasePage):
+
     def __init__(self, page: Page):
         super().__init__(page)
 
@@ -21,10 +23,14 @@ class ProductPage(BasePage):
         self.add_button = Link(page.get_by_role('link', name='Добавить в корзину'), 'Добавить в корзину')
 
 
+
+
+
+
     @allure.step('Проверка заголовка каталога для категории "{category_name}"')
     def check_catalog_header(self, category_name: Category):
         self.catalog_header.check_title_category(category_name)
-        self.catalog_header.check_title_catalog()
+        self.catalog_header.check_title_catalog_filter()
 
 
     @allure.step('Проверка, что название товара содержит категорию "{category_name}"')

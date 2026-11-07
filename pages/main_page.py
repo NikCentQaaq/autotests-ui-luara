@@ -3,13 +3,14 @@ from playwright.sync_api import Page
 
 from components.concern_catalog.concern_catalog_component import ConcernCatalogComponent
 from components.headers.header_component import HeaderComponent
-from components.headers.top_header_component import TopHeaderComponent
 from elements.base_element import BaseElement
 from pages.base_page import BasePage
 from tools.enums.category import Category
-
+from tools.enums.routes import Rout
 
 class MainPage(BasePage):
+
+    ROUTE = Rout.MAIN
 
     def __init__(self, page: Page):
         super().__init__(page)

@@ -3,22 +3,28 @@ from typing import Pattern
 import allure
 from playwright.sync_api import Page, expect
 
+from config import settings
 from elements.base_element import BaseElement
+from tools.enums.routes import Rout
 from tools.logger import get_logger
 
 logger = get_logger('BasePage')
 
 class BasePage:
+
+    ROUTE = Rout.MAIN
+
     def __init__(self, page: Page):
         self.page = page
 
 
-    def open(self, url: str):
-        step = f'Открытие URL {url}'
+    def open(self):
+        full_url = f"{settings.get_base_url()}{self.ROUTE}"
+        step = f'Открытие URL "{full_url}"'
 
         with allure.step(step):
             logger.info(step)
-            self.page.goto(url, wait_until="load")
+            self.page.goto(full_url, wait_until="load")
 
 
     def reload(self):

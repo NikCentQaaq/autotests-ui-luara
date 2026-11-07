@@ -1,7 +1,7 @@
 from random import random
 
 import allure
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from components.catalog.card_catalog_component import CardCatalogComponent
 from components.filter_catalog.catalog_filter_component import CatalogSelectedFilterComponent
@@ -10,9 +10,13 @@ from components.headers.header_component import HeaderComponent
 from elements.text import Text
 from pages.base_page import BasePage
 from tools.enums.category import Category
+from tools.enums.routes import Rout
+from tools.enums.sort_type import SortType
 
 
 class CatalogPage(BasePage):
+
+    ROUTE = Rout.CATALOG
 
     def __init__(self, page: Page):
         super().__init__(page)
@@ -26,22 +30,48 @@ class CatalogPage(BasePage):
         self.cards = page.locator('div.cart-trend')
 
 
+    @allure.step("Сортировка каталога по значению")
+    def sort_products_by_value(self, sort_type: SortType):
+        self.catalog_header.select_sort(sort_type)
+        self.catalog_header.check_selected_sort(sort_type)
 
-    @allure.step('Проверка элементов Каталога')
-    def check_elements(self):
+
+
+
+
+    @allure.step('Проверка элементов Каталога Без фильтрации')
+    def check_elements_without_filter(self):
+        self.header.check_elements()
+        self.catalog_header.check_without_filter()
+
+        self.check_cards_visible()
+
+
+    @allure.step('Проверка элементов Каталога, отфильтрованного по Категории')
+    def check_elements_filter_products(self):
         self.header.check_elements()
 
-        self.catalog_header.check_title_catalog()
+        self.catalog_header.check_title_catalog_filter()
 
         self.title_category.check_visible()
 
         self.catalog_selected_filter.check_visible()
+
+        self.check_cards_visible()
+
+
+    @allure.step('Проверка, что каталог содержит карточки товаров')
+    def check_cards_visible(self):
+        expect(self.cards.first).to_be_visible()
+
+        assert self.cards.count() > 0
 
 
     @allure.step('Проверка выбранной категории "{category_name}"')
     def check_selected_filter(self, category_name: Category):
         self.catalog_selected_filter.check_elements(category_name)
         self.title_category.check_have_text(category_name)
+        self.catalog_header.check_filter_by_category(category_name)
 
 
     @allure.step('Проверка, что все товары относятся к категории "{category_name}"')
