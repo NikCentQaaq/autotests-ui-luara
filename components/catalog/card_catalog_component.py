@@ -19,12 +19,13 @@ class CardCatalogComponent(BaseComponent):
 
 
 
+
     @allure.step('Проверка, что название товара содержит категорию "{category_name}"')
     def check_name_have_category(self, category_name: Category):
 
         self.name_item.check_contain_text(category_name.lower())
 
 
-    def click(self):
-        self.container.click()
+    def open(self):
+        self.name_item.click()
 

@@ -57,7 +57,7 @@ class CatalogPage(BasePage):
     @allure.step('Открытие карточки товара с индексом {index}')
     def open_product_card_by_index(self, index: int):
         card = CardCatalogComponent(self.page, self.cards.nth(index))
-        card.click()
+        card.open()
 
     @allure.step('Открытие случайной карточки товара')
     def open_product_card_random(self):
@@ -65,7 +65,7 @@ class CatalogPage(BasePage):
         index = random.randint(0,count_cards-1)
 
         card = CardCatalogComponent(self.page, self.cards.nth(index))
-        card.click()
+        card.open()
 
         return index
 
