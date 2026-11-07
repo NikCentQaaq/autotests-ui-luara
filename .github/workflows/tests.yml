@@ -8,33 +8,26 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
   run-tests:
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          playwright install --with-deps
 
-      - name: Install Playwright browsers
-        run: playwright install --with-deps
-
-      - name: Run Playwright tests with pytest
+      - name: Run Playwright tests with pytest and generate Allure results
         run: |
           pytest --alluredir=allure-results --numprocesses 2
 
@@ -45,19 +38,18 @@ jobs:
           name: allure-results
           path: allure-results
 
+
   publish-report:
     if: always()
-    needs: run-tests
+    needs: [ run-tests ]
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout gh-pages
+      - name: Check out repository
         uses: actions/checkout@v7
-        continue-on-error: true
         with:
           ref: gh-pages
           path: gh-pages
-          fetch-depth: 0
 
       - name: Download Allure results
         uses: actions/download-artifact@v4
@@ -65,18 +57,17 @@ jobs:
           name: allure-results
           path: allure-results
 
-      - name: Generate Allure Report
+      - name: Generates Allure Report with history
         uses: simple-elf/allure-report-action@v1.15
+        if: always()
         with:
-          gh_pages: gh-pages
           allure_results: allure-results
           allure_history: allure-history
 
-      - name: Deploy report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy report to Github Pages
         if: always()
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
-          force_orphan: true
