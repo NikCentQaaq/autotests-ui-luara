@@ -21,7 +21,7 @@ class CatalogHeaderComponent(BaseComponent):
 
 
         self.title_catalog_filter = Link(page.get_by_text('Каталог украшений'), 'Заголовок "Каталог украшений"')
-        self.title_category = Text(page.locator('div.bx-breadcrumb-item span').last, "Заголовок Категории")
+        self.title_category = Text(page.locator('div.h1_b_cat h1'), "Заголовок Категории")
 
 
 
@@ -34,22 +34,11 @@ class CatalogHeaderComponent(BaseComponent):
         self.sort.check_selected_value(expected_value=sort_type)
 
 
-
-
-
-
-
-
-
-
-
     @allure.step('Проверка заголовков каталога Без фильтраций')
     def check_without_filter(self):
         self.check_element_text_by_name(self.title_catalog)
         self.block_filter.check_visible()
         self.sort.check_visible()
-
-
 
 
     @allure.step('Проверка заголовка "Каталог украшений"')
@@ -64,7 +53,7 @@ class CatalogHeaderComponent(BaseComponent):
 
     @allure.step('Проверка заголовков каталога, фильтрация по Категории')
     def check_filter_by_category(self, category_name: Category):
-        self.check_element_text_by_name(self.block_filter)
+        self.block_filter.check_visible()
         self.sort.check_visible()
 
         self.check_title_catalog_filter()
