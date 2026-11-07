@@ -20,4 +20,3 @@ def product_page(page: Page) -> ProductPage:
     return ProductPage(page=page)
 
 
-# com
