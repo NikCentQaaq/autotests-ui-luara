@@ -34,6 +34,10 @@ class BaseComponent:
             element.check_visible()
             element.check_have_text(text)
 
+    @staticmethod
+    def check_equal(actual, expected):
+        assert actual == expected, f"Ожидалось: {expected}, получено: {actual}"
+
 
 
 

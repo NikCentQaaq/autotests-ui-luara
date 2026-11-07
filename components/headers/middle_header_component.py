@@ -5,6 +5,7 @@ from components.base_component import BaseComponent
 from elements.button import Button
 from elements.input import Input
 from elements.link import Link
+from elements.text import Text
 
 
 class MiddleHeaderComponent(BaseComponent):
@@ -22,6 +23,24 @@ class MiddleHeaderComponent(BaseComponent):
         self.orders = Link(self.container.get_by_role('link', name='Заказы'), name='Заказы')
         self.favorites = Link(self.container.get_by_role('link', name='Избранное'), name='Избранное')
         self.cart = Link(self.container.get_by_role('link', name='Корзина'), name='Корзина')
+
+        self.num_cart = Text(self.container.locator('span.headCartNum'), 'Кол-во в Корзине')
+
+
+
+    @allure.step('Получение количества товаров в корзине')
+    def get_num_cart(self) -> int:
+
+        return int(self.num_cart.get_text())
+
+
+
+    @allure.step('Проверка количества товаров в корзине: ожидается {expected_num}')
+    def check_num_cart(self, expected_num: int):
+        num = self.get_num_cart()
+        self.check_equal(num, expected_num)
+
+
 
 
     @allure.step('Проверка элементов Middle Header')
