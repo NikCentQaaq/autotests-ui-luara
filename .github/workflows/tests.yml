@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: gh-pages
@@ -64,6 +64,17 @@ jobs:
           allure_results: allure-results
           allure_history: allure-history
 
+      - name: Debug Allure History
+        run: |
+          echo "===== allure-history ====="
+          ls -la allure-history
+
+          echo "===== allure-history tree ====="
+          find allure-history -maxdepth 2    
+          
+          
+          
+
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
@@ -71,3 +82,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+          force_orphan: true
