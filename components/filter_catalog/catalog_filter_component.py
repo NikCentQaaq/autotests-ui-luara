@@ -11,7 +11,7 @@ class CatalogSelectedFilterComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.container = page.locator("div.catalog-block_filter")
+        self.container = page.locator("div.catalog-filter")
 
         self.selected_category = Text(self.container.locator('li.is-selected a'), 'Выбранный фильтр')
         self.reset_button = Link(self.container.locator('li.is-reset a'), 'Сбросить всё')
