@@ -1,6 +1,6 @@
 from random import randrange
 
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from components.base_component import BaseComponent
 import allure
@@ -22,6 +22,16 @@ class SizeProductComponent(BaseComponent):
 
 
 
+    @allure.step("Получение выбранного размера")
+    def get_selected_size(self) -> str:
+
+        if self.active_size.count() == 0:
+            return ""
+        expect(self.active_size).to_be_visible()
+        return self.active_size.inner_text().strip()
+
+
+
     @allure.step('Выбор рандомного размера из доступных')
     def select_random_size(self):
         count = self.size.count()
@@ -32,19 +42,16 @@ class SizeProductComponent(BaseComponent):
         with allure.step(f'Выбран размер {selected_size}'):
             size.click()
 
-        return selected_size
 
     @allure.step("Выбор размера при необходимости")
-    def select_size_if_needed(self) -> str:
+    def select_size_if_needed(self):
 
         if self.size.count() == 0:  # Размеров нет
-            return ""
+            return
 
         if self.active_size.count() > 0:   # Размер 1 и он уже выбран
-            selected_size = self.active_size.inner_text().strip()
-
-            with allure.step(f'Размер уже выбран "{selected_size}"'):
-                return selected_size
+            with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
+                return
 
         # Размеры есть, но ни один не выбран
-        return self.select_random_size()
+        self.select_random_size()

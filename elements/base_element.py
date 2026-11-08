@@ -88,6 +88,12 @@ class BaseElement:
 
 
 
+    @allure.step("Проверка существования элемента по локатору")
+    def exists(self, nth: int = 0) -> bool:
+        return self.get_locator(nth).count() > 0
+
+
+
 
 
 

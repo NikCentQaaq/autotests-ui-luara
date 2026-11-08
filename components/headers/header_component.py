@@ -21,6 +21,10 @@ class HeaderComponent(BaseComponent):
         self.middle_header.check_elements()
         self.top_panel.check_elements()
 
+    @allure.step("Открытие корзины")
+    def open_cart(self):
+        self.middle_header.click_cart()
+
 
 
 

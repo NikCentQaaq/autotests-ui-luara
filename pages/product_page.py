@@ -9,7 +9,7 @@ from elements.link import Link
 from elements.text import Text
 from pages.base_page import BasePage
 from tools.enums.category import Category
-
+from tools.models.product_info import ProductInfo
 
 
 class ProductPage(BasePage):
@@ -28,7 +28,7 @@ class ProductPage(BasePage):
 
         self.popup_success_add_product = Text(page.locator('div.notyf__message'), 'Товар успешно добавлен в корзину')
 
-
+        self.articul = Text(page.get_by_text('Арт:'), 'Артикул')
 
     @allure.step("Проверка уведомления об успешном добавлении товара")
     def check_popup_success_add(self):
@@ -38,11 +38,21 @@ class ProductPage(BasePage):
 
 
 
+    @allure.step('Получение Артикула товара')
+    def get_product_articul(self):
+        return self.articul.get_text().replace("Арт:", "").strip()
 
-    @allure.step('Получение Названия товара')
-    def get_product_name(self) -> str:
+    @allure.step('Получение Названия и Артикулатовара')
+    def get_product_name_and_articul(self) -> str:
         name = self.name_product.get_text()
         return name
+
+    @allure.step('Получение Названия товара')
+    def get_product_name(self):
+        name = self.get_product_name_and_articul().replace(f"{self.get_product_articul()}", "").strip()
+        return name
+
+
 
     @allure.step('Получение Цены товара')
     def get_product_price(self) -> int:
@@ -54,14 +64,19 @@ class ProductPage(BasePage):
             .strip()
         )
 
+    @allure.step('Получение данных продукта')
+    def get_product_info(self) -> ProductInfo:
+        return {
+            "name": self.get_product_name(),
+            "articul": self.get_product_articul(),
+            "price": self.get_product_price(),
+            "size": self.size.get_selected_size()
+        }
+
     @allure.step("Добавление товара в корзину")
     def add_product_to_cart(self):
-
-        selected_size = self.size.select_size_if_needed()
-
         self.add_button.click()
 
-        return selected_size
 
 
 

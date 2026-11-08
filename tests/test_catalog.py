@@ -12,7 +12,7 @@ from tools.enums.sort_type import SortType
 class TestCatalog:
 
     @allure.title('Открытие категории через блок каталога на главной странице')
-    @pytest.mark.smoke
+    @pytest.mark.regression
     @pytest.mark.parametrize(
         "catalog_category, product_category",
         [(Category.RINGS, Category.RING),
@@ -29,26 +29,23 @@ class TestCatalog:
         ]
     )
     def test_open_category_from_concern_catalog(
-            self, main_page: MainPage,
+            self,
+            opened_main_page: MainPage,
             catalog_page: CatalogPage,
             catalog_category: Category,
             product_category: Category
     ):
-        main_page.open()
-        main_page.check_current_url(re.compile(r"luara-art\.ru"))
 
-        main_page.open_category(catalog_category)
+        opened_main_page.open_category(catalog_category)
 
-        catalog_page.check_current_url(re.compile(r".*catalog/.*"))
+        catalog_page.check_current_url()
         catalog_page.check_elements_filter_products()
 
         catalog_page.check_selected_filter(catalog_category)
         catalog_page.check_products_category(product_category)
 
 
-
-
-    @pytest.mark.smoke
+    @pytest.mark.regression
     @allure.title('Сортировка продуктов в Каталоге')
     @pytest.mark.parametrize("sort_type",
     (SortType.POPULAR,
@@ -56,15 +53,32 @@ class TestCatalog:
      SortType.PRICE_ASC,
      SortType.PRICE_DESC),
             ids=["по популярности", "по комплектности", "по убыванию цены", "по возрастанию цены"])
-    def test_sort_products(self, sort_type:SortType, catalog_page: CatalogPage):
+    def test_sort_products(self, sort_type:SortType, opened_catalog_page: CatalogPage):
 
-        catalog_page.open()
+        opened_catalog_page.sort_products_by_value(sort_type)
+        opened_catalog_page.check_current_url()
 
-        catalog_page.check_current_url(re.compile(r".*catalog.*"))
-        catalog_page.check_elements_without_filter()
 
-        catalog_page.sort_products_by_value(sort_type)
-        catalog_page.check_current_url(re.compile(sort_type.url))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

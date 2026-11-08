@@ -1,4 +1,4 @@
-from random import random
+from random import randint
 
 import allure
 from playwright.sync_api import Page, expect
@@ -92,7 +92,7 @@ class CatalogPage(BasePage):
     @allure.step('Открытие случайной карточки товара')
     def open_product_card_random(self):
         count_cards = self.cards.count()
-        index = random.randint(0,count_cards-1)
+        index = randint(0,count_cards-1)
 
         card = CardCatalogComponent(self.page, self.cards.nth(index))
         card.open()

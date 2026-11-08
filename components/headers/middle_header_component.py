@@ -53,7 +53,12 @@ class MiddleHeaderComponent(BaseComponent):
         self.check_element_text_by_name(self.login)
         self.check_element_text_by_name(self.orders)
         self.check_element_text_by_name(self.favorites)
-        self.check_element_text_by_name(self.cart)
+        self.cart.check_visible()
+        self.cart.check_contain_text('Корзина')
+
+    @allure.step('Нажатие на корзину')
+    def click_cart(self):
+        self.cart.click()
 
 
 

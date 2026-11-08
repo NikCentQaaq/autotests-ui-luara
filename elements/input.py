@@ -10,8 +10,14 @@ logger = get_logger('INPUT')
 
 class Input(BaseElement):
 
-    # def get_locator(self, nth: int=0) -> Locator:
-    #     return super().get_locator_test_id(nth).locator('input')
+
+    def get_value(self) -> str:
+        step = f'Получение значения {self.type_of} "{self.name}"'
+        with allure.step(step):
+            logger.info(step)
+            return self.locator.input_value()
+
+
 
 
     def fill(self, value: str | int, nth: int=0):

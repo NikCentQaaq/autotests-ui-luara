@@ -1,3 +1,4 @@
+import re
 from typing import Pattern
 
 import allure
@@ -36,12 +37,19 @@ class BasePage:
 
 
 
-    def check_current_url(self, expected_url: Pattern[str]):
+    def check_current_url_expected(self, expected_url: Pattern[str]):
         step = f'Проверка соответствует ли текущий URL шаблону {expected_url.pattern}'
 
         with allure.step(step):
             logger.info(step)
             expect(self.page).to_have_url(expected_url)
+
+    def check_current_url(self):
+        step = f'Проверка соответствует ли текущий URL шаблону {self.ROUTE}'
+
+        with allure.step(step):
+            logger.info(step)
+            expect(self.page).to_have_url(re.compile(f".*{self.ROUTE}.*"))
 
     @staticmethod
     def check_element_text_by_name(element: BaseElement):

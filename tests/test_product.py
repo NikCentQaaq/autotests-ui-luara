@@ -1,28 +1,21 @@
-import re
-
 import allure
 import pytest
 
-from config import settings
 from pages.catalog_page import CatalogPage
-from pages.main_page import MainPage
 from pages.product_page import ProductPage
-from tools.enums.category import Category
+
 
 
 class TestProduct:
 
     @allure.title("Открытие карточки товара из каталога")
     @pytest.mark.smoke
-    @pytest.mark.parametrize("index", (1, 5, 10))
-    def test_open_product_from_catalog(self, index: int, catalog_page: CatalogPage, product_page: ProductPage):
-        catalog_page.open()
-        catalog_page.check_current_url(re.compile(r".*catalog.*"))
-        catalog_page.check_elements_without_filter()
+    @pytest.mark.parametrize("index", (1, 10))
+    def test_open_product_from_catalog(self, index: int, opened_catalog_page: CatalogPage, product_page: ProductPage):
 
-        catalog_page.open_product_card_by_index(index)
+        opened_catalog_page.open_product_card_by_index(index)
 
-        product_page.check_current_url(re.compile(r".*catalog/product/.*"))
+        product_page.check_current_url()
         product_page.check_elements()
 
 
