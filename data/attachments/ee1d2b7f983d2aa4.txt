@@ -1,0 +1,247 @@
+INFO     BasePage:base_page.py:27 Открытие URL "https://luara-art.ru/"
+INFO     BasePage:base_page.py:44 Проверка соответствует ли текущий URL шаблону luara-art\.ru
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Телефон" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Телефон" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Телефон" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Телефон" имеет текст "8 (800) 333-81-17"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Акции" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Акции" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Акции" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Акции" имеет текст "Акции"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Доставка и оплата" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Доставка и оплата" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Доставка и оплата" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Доставка и оплата" имеет текст "Доставка и оплата"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Магазины" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Магазины" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Магазины" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Магазины" имеет текст "Магазины"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Сертификат" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Сертификат" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Сертификат" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Сертификат" имеет текст "Сертификат"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Условия покупки" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Условия покупки" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Условия покупки" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Условия покупки" имеет текст "Условия покупки"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Контакты" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Контакты" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Контакты" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Контакты" имеет текст "Контакты"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Вакансии" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Вакансии" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Вакансии" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Вакансии" имеет текст "Вакансии"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Логотип Luara" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Логотип Luara" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Поиск" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Input "Поиск" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Каталог" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Каталог" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Каталог" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Button "Каталог" имеет текст "Каталог"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Найти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Найти" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Найти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Button "Найти" имеет текст "Найти"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Войти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Войти" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Войти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Войти" имеет текст "Войти"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Заказы" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Заказы" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Заказы" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Заказы" имеет текст "Заказы"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Избранное" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Избранное" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Избранное" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Избранное" имеет текст "Избранное"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Корзина" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Корзина" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Корзина" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:78 Проверка, что Link "Корзина" содержит текст "Корзина"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Панель "Клуб привилегий"" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Панель "Клуб привилегий"" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Закрыть панель" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Закрыть панель" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Каталог" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Каталог" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Каталог" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Text "Каталог" имеет текст "Каталог"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Заголовок каталога" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Заголовок каталога" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Заголовок каталога" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Text "Заголовок каталога" имеет текст "Украшения для особых моментов"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Описание каталога" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Описание каталога" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Описание каталога" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Text "Описание каталога" имеет текст "Выберите категорию и найдите своё идеальное украшение"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Назад" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Назад" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Вперёд" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Вперёд" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Счетчик" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Счетчик" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Изображение" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Image "Изображение" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Название" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Кол-во товаров" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Кол-во товаров" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Переход к товарам" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Переход к товарам" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Изображение" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Image "Изображение" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Название" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Кол-во товаров" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Кол-во товаров" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Переход к товарам" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Переход к товарам" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Изображение" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Image "Изображение" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Название" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Кол-во товаров" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Кол-во товаров" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Переход к товарам" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Переход к товарам" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Изображение" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Image "Изображение" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Название" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Кол-во товаров" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Кол-во товаров" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Переход к товарам" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Переход к товарам" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Изображение" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Image "Изображение" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Название" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Кол-во товаров" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Кол-во товаров" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Переход к товарам" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Переход к товарам" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Блок коллекции" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что BaseElement "Блок коллекции" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Блок тренд" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что BaseElement "Блок тренд" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Блок акции" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что BaseElement "Блок акции" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Блок "О нас"" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что BaseElement "Блок "О нас"" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Поиск" с индексом "0"
+INFO     INPUT:input.py:28 Ввод значения кольцо" в Input "Поиск" 
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Найти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:42 Клик Button "Найти"
+INFO     BasePage:base_page.py:51 Проверка соответствует ли текущий URL шаблону /search
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Телефон" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Телефон" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Телефон" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Телефон" имеет текст "8 (800) 333-81-17"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Акции" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Акции" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Акции" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Акции" имеет текст "Акции"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Доставка и оплата" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Доставка и оплата" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Доставка и оплата" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Доставка и оплата" имеет текст "Доставка и оплата"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Магазины" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Магазины" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Магазины" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Магазины" имеет текст "Магазины"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Сертификат" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Сертификат" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Сертификат" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Сертификат" имеет текст "Сертификат"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Условия покупки" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Условия покупки" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Условия покупки" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Условия покупки" имеет текст "Условия покупки"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Контакты" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Контакты" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Контакты" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Контакты" имеет текст "Контакты"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Вакансии" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Вакансии" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Вакансии" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Вакансии" имеет текст "Вакансии"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Логотип Luara" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Логотип Luara" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Поиск" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Input "Поиск" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Каталог" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Каталог" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Каталог" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Button "Каталог" имеет текст "Каталог"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Найти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Найти" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Найти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Button "Найти" имеет текст "Найти"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Войти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Войти" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Войти" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Войти" имеет текст "Войти"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Заказы" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Заказы" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Заказы" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Заказы" имеет текст "Заказы"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Избранное" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Избранное" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Избранное" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Link "Избранное" имеет текст "Избранное"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Корзина" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Корзина" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Корзина" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:78 Проверка, что Link "Корзина" содержит текст "Корзина"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Панель "Клуб привилегий"" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Панель "Клуб привилегий"" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Закрыть панель" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Закрыть панель" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Результаты поиска" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Результаты поиска" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Результаты поиска" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Text "Результаты поиска" имеет текст "Результаты поиска"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Plage" с амазонитом и."
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Horizon""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Horizon""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо на фалангу/мизинец "V""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо на фалангу/мизинец "V""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Glossy Rodium" с жемчугом и."
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Duo Matches" с фианитами"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Match""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Match""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Groove""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Groove""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Silver Bamboo""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Golden Bamboo""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Dancing Pearl" с жемчугом и."
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо Victory d2.5"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "White oud" d2"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо коллекции "Вдохновляясь творчеством В.Кандинского""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Серебряное кольцо-дорожка с фианитами"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Серебряное кольцо-дорожка с фианитами"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Drops""
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:88 Получен текст "Кольцо "Drops""
