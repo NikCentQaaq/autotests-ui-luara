@@ -5,4 +5,11 @@ class Rout(StrEnum):
     MAIN = ""
     CATALOG = "catalog"
     CART = "personal/cart"
-    # LOGIN = "/auth"
+    SEARCH = "/search"
+
+
+
+
+class UrlPattern(StrEnum):
+    PRICE_ASC = r".*PRICE=asc"
+    PRICE_DESC = r".*PRICE=desc"

@@ -9,33 +9,31 @@ from components.headers.catalog_header_component import CatalogHeaderComponent
 from components.headers.header_component import HeaderComponent
 from elements.text import Text
 from pages.base_page import BasePage
+from pages.product_list_page import ProductListPage
 from tools.enums.category import Category
 from tools.enums.routes import Rout
 from tools.enums.sort_type import SortType
 
 
-class CatalogPage(BasePage):
+class CatalogPage(ProductListPage):
 
     ROUTE = Rout.CATALOG
 
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.header = HeaderComponent(page)
         self.catalog_header = CatalogHeaderComponent(page)
 
         self.title_category = Text(page.locator('div.h1_b_cat h1'), 'Заголовок Категории')
         self.catalog_selected_filter = CatalogSelectedFilterComponent(page)
 
-        self.cards = page.locator('div.cart-trend')
 
 
     @allure.step("Сортировка каталога по значению")
     def sort_products_by_value(self, sort_type: SortType):
         self.catalog_header.select_sort(sort_type)
+
         self.catalog_header.check_selected_sort(sort_type)
-
-
 
 
 
@@ -43,28 +41,19 @@ class CatalogPage(BasePage):
     def check_elements_without_filter(self):
         self.header.check_elements()
         self.catalog_header.check_without_filter()
-
         self.check_cards_visible()
 
 
     @allure.step('Проверка элементов Каталога, отфильтрованного по Категории')
     def check_elements_filter_products(self):
         self.header.check_elements()
-
         self.catalog_header.check_title_catalog_filter()
-
         self.title_category.check_visible()
 
         self.catalog_selected_filter.check_visible()
-
         self.check_cards_visible()
 
 
-    @allure.step('Проверка, что каталог содержит карточки товаров')
-    def check_cards_visible(self):
-        expect(self.cards.first).to_be_visible()
-
-        assert self.cards.count() > 0
 
 
     @allure.step('Проверка выбранной категории "{category_name}"')
@@ -84,26 +73,30 @@ class CatalogPage(BasePage):
             card.check_name_have_category(category_name.lower())
 
 
-    @allure.step('Открытие карточки товара с индексом {index}')
-    def open_product_card_by_index(self, index: int):
-        card = CardCatalogComponent(self.page, self.cards.nth(index))
-        card.open()
 
-    @allure.step('Открытие случайной карточки товара')
-    def open_product_card_random(self):
-        count_cards = self.cards.count()
-        index = randint(0,count_cards-1)
+    @allure.step("Получение Списка цен товаров")
+    def get_products_prices(self) -> list[int]:
+        prices = []
 
-        card = CardCatalogComponent(self.page, self.cards.nth(index))
-        card.open()
+        for i in range(self.cards.count()):
+            card = CardCatalogComponent(self.page,self.cards.nth(i))
+            prices.append(card.get_price())
 
-        return index
+        return prices
 
 
+    @allure.step("Проверка сортировки по возрастанию цены")
+    def check_prices_sorted_asc(self):
+        prices = self.get_products_prices()
+
+        assert prices == sorted(prices), f'Цены отсортированы неверно'
 
 
+    @allure.step("Проверка сортировки по убыванию цены")
+    def check_prices_sorted_desc(self):
+        prices = self.get_products_prices()
 
-
+        assert prices == sorted(prices, reverse=True), f'Цены отсортированы неверно'
 
 
 

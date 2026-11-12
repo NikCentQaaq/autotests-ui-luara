@@ -1,3 +1,4 @@
+import re
 from random import randrange
 
 from playwright.sync_api import Page, expect
@@ -41,6 +42,7 @@ class SizeProductComponent(BaseComponent):
 
         with allure.step(f'Выбран размер {selected_size}'):
             size.click()
+            expect(size).to_have_class(re.compile(r"\bactive\b"))
 
 
     @allure.step("Выбор размера при необходимости")

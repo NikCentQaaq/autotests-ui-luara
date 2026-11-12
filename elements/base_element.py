@@ -83,9 +83,10 @@ class BaseElement:
         step = f'Получение текста {self.type_of} "{self.name}"'
         with allure.step(step):
             locator = self.get_locator()
-            logger.info(f'Получен текст {locator.inner_text().strip()}')
-            return locator.text_content().strip()
+            text = locator.inner_text().strip()
 
+            logger.info(f'Получен текст "{text}"')
+            return text
 
 
     @allure.step("Проверка существования элемента по локатору")

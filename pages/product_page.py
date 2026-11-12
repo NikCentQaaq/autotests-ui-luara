@@ -9,6 +9,7 @@ from elements.link import Link
 from elements.text import Text
 from pages.base_page import BasePage
 from tools.enums.category import Category
+from tools.function import parse_int_price
 from tools.models.product_info import ProductInfo
 
 
@@ -23,7 +24,7 @@ class ProductPage(BasePage):
 
         self.image = Image(page.locator('img.img_body'), 'Изображение')
         self.name_product = Text(page.locator('div.bx h1.ttl'), 'Название')
-        self.price = Text(page.locator('div.price div.kc-current_price'), 'Цена')
+        self.price = Text(page.locator('div.kc-current_price'), 'Цена')
         self.add_button = Link(page.get_by_role('link', name='Добавить в корзину'), 'Добавить в корзину')
 
         self.popup_success_add_product = Text(page.locator('div.notyf__message'), 'Товар успешно добавлен в корзину')
@@ -42,7 +43,7 @@ class ProductPage(BasePage):
     def get_product_articul(self):
         return self.articul.get_text().replace("Арт:", "").strip()
 
-    @allure.step('Получение Названия и Артикулатовара')
+    @allure.step('Получение Названия и Артикула товара')
     def get_product_name_and_articul(self) -> str:
         name = self.name_product.get_text()
         return name
@@ -56,20 +57,15 @@ class ProductPage(BasePage):
 
     @allure.step('Получение Цены товара')
     def get_product_price(self) -> int:
-        price = self.price.get_text()
-        return int(
-            price.replace("₽", "")
-            .replace(" ", "")
-            .replace("\xa0", "")
-            .strip()
-        )
+        return parse_int_price(self.price.get_text())
+
 
     @allure.step('Получение данных продукта')
     def get_product_info(self) -> ProductInfo:
         return {
             "name": self.get_product_name(),
             "articul": self.get_product_articul(),
-            "price": self.get_product_price(),
+            "price_quantity": self.get_product_price(),
             "size": self.size.get_selected_size()
         }
 
@@ -81,7 +77,7 @@ class ProductPage(BasePage):
 
 
     def check_num_cart_into_header(self, expected_num: int):
-        self.header.middle_header.check_num_cart(expected_num)
+        self.header.check_quantity(expected_num)
 
 
 

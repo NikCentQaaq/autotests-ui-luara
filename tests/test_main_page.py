@@ -15,3 +15,4 @@ class TestMainPage:
         main_page.check_current_url_expected(re.compile(r"luara-art\.ru"))
 
         main_page.check_elements()
+

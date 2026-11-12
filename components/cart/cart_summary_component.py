@@ -6,6 +6,7 @@ from elements.button import Button
 from elements.input import Input
 from elements.link import Link
 from elements.text import Text
+from tools.function import parse_int_price, parse_int_sale
 
 
 class CartSummaryComponent(BaseComponent):
@@ -46,8 +47,8 @@ class CartSummaryComponent(BaseComponent):
 
     @allure.step("Получение итоговой стоимости")
     def get_total_price(self) -> int:
-        price = self.total_price.get_text().replace("₽", "").replace(" ", "").replace("\xa0", "")
-        return int(price)
+        return parse_int_price(self.total_price.get_text())
+
 
 
     @allure.step('Проверка итоговой стоимости "{expected}" ₽')
@@ -68,11 +69,7 @@ class CartSummaryComponent(BaseComponent):
 
     @allure.step("Получение суммы скидки")
     def get_discount(self) -> int:
-        discount = (
-            self.discount.get_text().replace("₽", "").replace("−", "") .replace("-", "")
-            .replace(" ", "").replace("\xa0", ""))
-
-        return int(discount)
+        return parse_int_sale(self.discount.get_text())
 
     @allure.step('Проверка суммы скидки "{expected}" ₽')
     def check_discount(self, expected: int):

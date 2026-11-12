@@ -12,7 +12,7 @@ class CardConcernComponent(BaseComponent):
         super().__init__(page)
         self.container = container
 
-        self.card = Button(container.locator("a.concern-card"), "Карточка категории")
+        self.card = Button(container, "Карточка категории")
 
         self.image = Image(container.locator("span.concern-card_media img"), 'Изображение')
         self.name = Text(container.locator('span.concern-card_name'), 'Название')

@@ -64,3 +64,4 @@ class BasePage:
         with allure.step(step):
             element.check_visible()
             element.check_have_text(text)
+

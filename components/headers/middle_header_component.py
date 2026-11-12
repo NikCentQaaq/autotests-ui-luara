@@ -16,6 +16,7 @@ class MiddleHeaderComponent(BaseComponent):
 
         self.logo = Link(self.container.get_by_role('link', name='Luara'), 'Логотип Luara')
         self.catalog_button = Button(self.container.get_by_role('button', name='Каталог'), 'Каталог')
+
         self.search_input = Input(self.container.get_by_placeholder('Искать на Luara'), 'Поиск')
         self.search_button = Button(self.container.get_by_role('button', name='Найти'), 'Найти')
 
@@ -25,20 +26,6 @@ class MiddleHeaderComponent(BaseComponent):
         self.cart = Link(self.container.get_by_role('link', name='Корзина'), name='Корзина')
 
         self.num_cart = Text(self.container.locator('span.headCartNum'), 'Кол-во в Корзине')
-
-
-
-    @allure.step('Получение количества товаров в корзине')
-    def get_num_cart(self) -> int:
-
-        return int(self.num_cart.get_text())
-
-
-
-    @allure.step('Проверка количества товаров в корзине: ожидается {expected_num}')
-    def check_num_cart(self, expected_num: int):
-        num = self.get_num_cart()
-        self.check_equal(num, expected_num)
 
 
 
@@ -59,6 +46,17 @@ class MiddleHeaderComponent(BaseComponent):
     @allure.step('Нажатие на корзину')
     def click_cart(self):
         self.cart.click()
+
+    @allure.step('Ввод "{value}" в поле Поиска')
+    def input_search(self, value: str):
+        self.search_input.fill(value)
+
+
+    @allure.step('Нажатие кнопки "Поиск')
+    def click_search_button(self):
+        self.search_button.click()
+
+
 
 
 

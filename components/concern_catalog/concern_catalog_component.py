@@ -13,21 +13,22 @@ class ConcernCatalogComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.container = page.locator("//section[@class='concern']")
+        self.container = page.locator("section.concern")
 
         self.text_catalog = Text(self.container.get_by_text('Каталог'), 'Каталог')
         self.title_catalog = Text(self.container.get_by_text('Украшения для особых моментов'), 'Заголовок каталога')
         self.lead_catalog = Text(self.container.get_by_text('Выберите категорию и найдите своё идеальное украшение'), 'Описание каталога')
 
-        self.cards = self.container.locator("li.concern-slide")  # 7 карточек
+        self.cards = self.container.locator("a.concern-card")  # 7 карточек
         self.nav = NavConcernComponent(page)
 
 
 
-    @allure.step('Проверка видимости 4 карт')
-    def check_visible_4_cards(self):
+    @allure.step('Проверка видимости 5 карт')
+    def check_visible_5_cards(self):
+        expect(self.container).to_be_visible()
         expect(self.cards).to_have_count(7)
-        for i in range(4):  # отображается 4 элемента
+        for i in range(5):  # отображается 4 элемента
             CardConcernComponent(self.page, self.cards.nth(i)).check_elements()
 
     @allure.step('Проверка элементов блока Каталога')
@@ -39,7 +40,7 @@ class ConcernCatalogComponent(BaseComponent):
         self.check_element(self.lead_catalog, 'Выберите категорию и найдите своё идеальное украшение')
         self.nav.check_elements()
 
-        self.check_visible_4_cards()
+        self.check_visible_5_cards()
 
 
 

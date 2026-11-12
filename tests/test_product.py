@@ -2,8 +2,10 @@ import allure
 import pytest
 
 from pages.catalog_page import CatalogPage
+from pages.main_page import MainPage
 from pages.product_page import ProductPage
-
+from pages.search_page import SearchPage
+from tools.enums.category import Category
 
 
 class TestProduct:
@@ -19,6 +21,13 @@ class TestProduct:
         product_page.check_elements()
 
 
+    @allure.title("Открытие карточки товара из результатов Поиска")
+    @pytest.mark.smoke
+    def test_open_product_from_search(self, opened_search_page: SearchPage, product_page: ProductPage):
+        opened_search_page.open_product_card_by_index(0)
+
+        product_page.check_current_url()
+        product_page.check_elements()
 
 
 
@@ -26,47 +35,46 @@ class TestProduct:
 
 
 
-    # @allure.title("Открытие карточки товара из каталога")
-    # @pytest.mark.smoke
-    # @pytest.mark.parametrize(
-    #     "catalog_category, product_category",
-    #     [(Category.RINGS, Category.RING),
-    #      (Category.EARRINGS, Category.EARRINGS),
-    #      (Category.BRACELETS, Category.BRACELET),
-    #      (Category.NECKLACES, Category.NECKLACES),
-    #      (Category.PENDANTS, Category.PENDANT)],
-    #     ids=[
-    #         "rings",
-    #         "earrings",
-    #         "bracelets",
-    #         "necklaces",
-    #         "pendants",
-    #     ]
-    # )
-    # def test_open_product_from_catalog_FULL(
-    #         self,
-    #         main_page: MainPage,
-    #         catalog_page: CatalogPage,
-    #         product_page: ProductPage,
-    #         catalog_category: Category,
-    #         product_category: Category
-    # ):
-    #
-    #     main_page.open(settings.get_base_url())
-    #     main_page.check_current_url(re.compile(r"luara-art\.ru"))
-    #
-    #     main_page.open_category(catalog_category)
-    #
-    #     catalog_page.check_current_url(re.compile(r".*catalog/.*"))
-    #     catalog_page.check_elements()
-    #
-    #     catalog_page.open_product_card_by_index(1)
-    #
-    #     product_page.check_current_url(re.compile(r".*catalog/product/.*"))
-    #     product_page.check_elements()
-    #
-    #     product_page.check_catalog_header(catalog_category)
-    #     product_page.check_name_have_category(product_category)
+
+
+
+
+
+    @allure.title("Открытие товара из выбранной категории")
+    @pytest.mark.parametrize(
+        "catalog_category, product_category",[
+            pytest.param(Category.RINGS,Category.RING,
+                id="rings",  marks=pytest.mark.smoke
+            ),
+            pytest.param( Category.EARRINGS,Category.EARRINGS,
+                id="earrings", marks=pytest.mark.regression
+            ),
+            pytest.param(Category.BRACELETS,Category.BRACELET,
+                id="bracelets", marks=pytest.mark.regression
+            ),
+            pytest.param(Category.NECKLACES,Category.NECKLACES,
+                id="necklaces", marks=pytest.mark.regression
+            ),
+            pytest.param(Category.PENDANTS,Category.PENDANT,
+                id="pendants", marks=pytest.mark.regression
+            ),
+        ],
+    )
+    def test_open_product_from_category(
+            self,
+            opened_main_page: MainPage,
+            catalog_page: CatalogPage,
+            product_page: ProductPage,
+            catalog_category: Category,
+            product_category: Category
+    ):
+        opened_main_page.open_category(catalog_category)
+
+        catalog_page.open_product_card_random()
+
+        product_page.check_current_url()
+        product_page.check_elements()
+        product_page.check_name_have_category(product_category)
 
 
 

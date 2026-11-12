@@ -51,7 +51,7 @@ class CartPage(BasePage):
     def get_item_quantity(self, index: int) -> int:
         item = self.get_item(index)
         count = item.get_quantity()
-        return count
+        return int(count)
 
 
     @allure.step("Проверка отображения товаров")
@@ -79,12 +79,15 @@ class CartPage(BasePage):
     def delete_item(self, index: int):
         self.get_item(index).delete()
 
+
+
     @allure.step("Увеличение количества товара №{index} на {quantity}")
-    def plus_quantity_item(self, index: int, quantity: int):
+    def plus_quantity_item(self, index: int, quantity: int = 1):
         self.get_item(index).plus_quantity(quantity)
 
+
     @allure.step("Уменьшение количества товара №{index} на {quantity}")
-    def minus_quantity_item(self, index: int, quantity: int):
+    def minus_quantity_item(self, index: int, quantity: int = 1):
         self.get_item(index).minus_quantity(quantity)
 
     @allure.step('Проверка количества товара №{index}')
@@ -99,7 +102,7 @@ class CartPage(BasePage):
         self.summary.check_total_price(expected_price)
 
     @allure.step('Проверка общего количества товаров "{expected}"')
-    def check_total_quantity(self, expected: int):
+    def check_total_quantity_expected(self, expected: int):
         self.summary.check_total_quantity(expected)
 
     @allure.step('Проверка общей скидки "{expected}" ₽')
@@ -142,6 +145,21 @@ class CartPage(BasePage):
         self.title.check_contain_text('Корзина')
 
         self.empty_cart.check_elements()
+
+
+
+
+    @allure.step("Ожидание загрузки товаров в корзине")
+    def wait_items_loaded(self):
+        expect(self.items.first).to_be_visible(timeout=10000)
+
+    @allure.step("Получение данных товара в корзине №{index}")
+    def get_product_info(self, index: int):
+        product = self.get_item(index)
+        return product.get_product_info()
+
+
+
 
 
 
