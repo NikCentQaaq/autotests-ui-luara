@@ -7,6 +7,8 @@ class Rout(StrEnum):
     CART = "personal/cart"
     SEARCH = "/search"
 
+    LOGIN = "/login"
+
 
 
 

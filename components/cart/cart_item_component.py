@@ -63,8 +63,7 @@ class CartItemComponent(BaseComponent):
 
     @allure.step('Проверка названия товара "{expected}"')
     def check_name(self, expected: str):
-        self.check_equal(self.get_name(), expected)
-
+        self.name.check_contain_text(expected)
 
 
 

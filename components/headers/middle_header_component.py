@@ -56,6 +56,10 @@ class MiddleHeaderComponent(BaseComponent):
     def click_search_button(self):
         self.search_button.click()
 
+    @allure.step('Нажатие на Логотип')
+    def click_logo(self):
+        self.logo.click()
+
 
 
 

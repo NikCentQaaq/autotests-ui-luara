@@ -42,11 +42,14 @@ class SizeProductComponent(BaseComponent):
 
         with allure.step(f'Выбран размер {selected_size}'):
             size.click()
-            expect(size).to_have_class(re.compile(r"\bactive\b"))
+            expect(self.active_size).to_have_count(1)
+            expect(self.active_size).to_contain_text(selected_size)
 
 
     @allure.step("Выбор размера при необходимости")
     def select_size_if_needed(self):
+
+        self.wait_loaded()
 
         if self.size.count() == 0:  # Размеров нет
             return
@@ -57,3 +60,15 @@ class SizeProductComponent(BaseComponent):
 
         # Размеры есть, но ни один не выбран
         self.select_random_size()
+
+
+
+    @allure.step("Ожидание загрузки блока размеров")
+    def wait_loaded(self):
+        expect(self.container).to_be_visible()
+
+        if self.size.count() > 0:
+            expect(self.size.first).to_have_attribute(
+                "aria-disabled",
+                "false"
+            )

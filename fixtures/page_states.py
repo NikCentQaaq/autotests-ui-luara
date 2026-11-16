@@ -36,6 +36,7 @@ def opened_product(
 
     opened_catalog_page.open_product_card_by_index(index)
     product_page.check_current_url()
+    product_page.check_elements()
     return product_page
 
 

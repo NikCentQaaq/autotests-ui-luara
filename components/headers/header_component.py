@@ -44,6 +44,9 @@ class HeaderComponent(BaseComponent):
         self.middle_header.input_search(value)
         self.middle_header.click_search_button()
 
+    @allure.step("Открытие главной страницы")
+    def open_main_page(self):
+        self.middle_header.click_logo()
 
 
 

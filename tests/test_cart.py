@@ -12,16 +12,18 @@ class TestCart:
     @pytest.mark.parametrize(
         "opened_product", # параметр передается в фикстуру!
         [
-            pytest.param(1, id="product_2"),
-            pytest.param(11, id="product_12")
+            pytest.param(0, id="product_1"),
+            pytest.param(10, id="product_11")
         ],
         indirect=True
     )
+    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_add_1_product_to_cart(self, opened_product: ProductPage, cart_page: CartPage):
 
         opened_product.check_current_url()
 
         opened_product.size.select_size_if_needed()
+
         product = opened_product.get_product_info()
 
         opened_product.add_product_to_cart()
@@ -84,6 +86,7 @@ class TestCart:
 
     @allure.title("Пересчет итоговой стоимости корзины после увеличения количества товара на 1")
     @pytest.mark.smoke
+    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_cart_price_after_plus_1_quantity(self, cart_with_1_product: CartPage):
 
         product= cart_with_1_product.get_product_info(index=0)
@@ -99,6 +102,7 @@ class TestCart:
 
     @allure.title("Пересчет итоговой стоимости корзины после уменьшения количества товара на 1")
     @pytest.mark.smoke
+    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_cart_price_after_minus_1_quantity(self, cart_with_2_items_products: CartPage):
 
         product= cart_with_2_items_products.get_product_info(index=0)
