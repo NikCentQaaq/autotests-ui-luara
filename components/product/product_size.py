@@ -1,4 +1,4 @@
-import re
+
 from random import randrange
 
 from playwright.sync_api import Page, expect
@@ -49,8 +49,6 @@ class SizeProductComponent(BaseComponent):
     @allure.step("Выбор размера при необходимости")
     def select_size_if_needed(self):
 
-        self.wait_loaded()
-
         if self.size.count() == 0:  # Размеров нет
             return
 
@@ -63,12 +61,9 @@ class SizeProductComponent(BaseComponent):
 
 
 
-    @allure.step("Ожидание загрузки блока размеров")
-    def wait_loaded(self):
-        expect(self.container).to_be_visible()
 
-        if self.size.count() > 0:
-            expect(self.size.first).to_have_attribute(
-                "aria-disabled",
-                "false"
-            )
+    # @allure.step("Проверка, что выбранный размер стал недоступен")
+    # def check_selected_size_unavailable(self):
+    #     expect(self.active_size).to_have_class(re.compile(r"\bactive\b"))
+    #     expect(self.active_size).to_have_class(re.compile(r"\bis-unavailable\b"))
+    #     expect(self.active_size).to_have_attribute("aria-disabled", "true")

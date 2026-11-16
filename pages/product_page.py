@@ -72,6 +72,7 @@ class ProductPage(BasePage):
     @allure.step("Добавление товара в корзину")
     def add_product_to_cart(self):
         self.add_button.click()
+        expect(self.header.middle_header.num_cart.get_locator()).not_to_have_text("0")
 
 
 
