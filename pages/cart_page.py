@@ -56,8 +56,7 @@ class CartPage(BasePage):
 
     @allure.step("Проверка отображения товаров")
     def check_items_visible(self):
-
-        assert self.items.count() > 0
+        expect(self.items.first).to_be_visible(timeout=10000)
 
         for i in range(self.items.count()):
             self.get_item(i).check_elements()
@@ -83,7 +82,7 @@ class CartPage(BasePage):
 
     @allure.step("Увеличение количества товара №{index} на {quantity}")
     def plus_quantity_item(self, index: int, quantity: int = 1):
-        old_price = self.summary.total_price.get_text()
+        old_price = self.summary.total_price.get_text().strip()
 
         self.get_item(index).plus_quantity(quantity)
 

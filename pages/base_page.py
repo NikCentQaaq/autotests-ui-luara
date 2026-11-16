@@ -4,6 +4,7 @@ from typing import Pattern
 import allure
 from playwright.sync_api import Page, expect
 
+from components.cookie_component import CookieComponent
 from config import settings
 from elements.base_element import BaseElement
 from tools.enums.routes import Rout
@@ -22,6 +23,8 @@ class BasePage:
     def open(self):
         full_url = f"{settings.get_base_url()}{self.ROUTE}"
         step = f'Открытие URL "{full_url}"'
+
+        CookieComponent(self.page).accept_if_visible()
 
         with allure.step(step):
             logger.info(step)

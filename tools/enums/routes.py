@@ -8,6 +8,8 @@ class Rout(StrEnum):
     SEARCH = "/search"
 
     LOGIN = "/login"
+    AKTSII = "/aktsii"
+    MAGAZINES = "/magazines"
 
 
 
