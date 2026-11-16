@@ -1,3 +1,4 @@
+
 name: UI tests
 
 on:
@@ -38,31 +39,36 @@ jobs:
           name: allure-results
           path: allure-results
 
-
   publish-report:
-    needs: run-tests
     if: always()
+    needs: [ run-tests ]
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Download Allure results
+        uses: actions/download-artifact@v4
         with:
           name: allure-results
           path: allure-results
 
-      - name: Debug
-        run: |
-          pwd
-          ls -R
-
-      - uses: simple-elf/allure-report-action@v1.15
+      - name: Generates Allure Report with history
+        uses: simple-elf/allure-report-action@v1.15
+        if: always()
         with:
           allure_results: allure-results
-          allure_report: allure-report
+          allure_history: allure-history
 
-      - uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: allure-report
-          force_orphan: true
+          publish_dir: allure-history

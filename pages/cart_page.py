@@ -83,15 +83,25 @@ class CartPage(BasePage):
 
     @allure.step("Увеличение количества товара №{index} на {quantity}")
     def plus_quantity_item(self, index: int, quantity: int = 1):
+        old_price = self.summary.total_price.get_text()
+
         self.get_item(index).plus_quantity(quantity)
 
+        expect(self.summary.total_price.locator).not_to_have_text(str(old_price))
 
     @allure.step("Уменьшение количества товара №{index} на {quantity}")
     def minus_quantity_item(self, index: int, quantity: int = 1):
+        old_price = self.summary.total_price.get_text()
+
         self.get_item(index).minus_quantity(quantity)
+
+        expect(self.summary.total_price.locator).not_to_have_text(str(old_price))
+
+
 
     @allure.step('Проверка количества товара №{index}')
     def check_item_quantity(self, index: int, expected_quantity: int):
+
         self.get_item(index).check_quantity(expected_quantity)
 
 

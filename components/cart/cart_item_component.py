@@ -2,7 +2,7 @@ import allure
 from playwright.sync_api import Page, Locator, expect
 
 from components.base_component import BaseComponent
-from elements.base_element import BaseElement
+
 from elements.button import Button
 from elements.input import Input
 from elements.link import Link
@@ -109,14 +109,21 @@ class CartItemComponent(BaseComponent):
 
     @allure.step('Увеличение количества товара на {quantity}')
     def plus_quantity(self, quantity: int = 1):
+        print(self.button_plus.get_locator().count())
         for i in range(quantity):
+            old_quantity = self.get_quantity()
+
             self.button_plus.click()
+
+            expect(self.quantity.get_locator()).to_have_value(str(old_quantity + 1))
 
 
     @allure.step('Уменьшение количества товара на {quantity}')
     def minus_quantity(self, quantity: int = 1):
         for i in range(quantity):
+            old_quantity = self.get_quantity()
             self.button_minus.click()
+            expect(self.quantity.get_locator()).to_have_value(str(old_quantity - 1))
 
 
     @allure.step('Удаление товара из корзины')

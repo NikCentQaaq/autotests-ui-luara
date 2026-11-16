@@ -21,7 +21,7 @@ class CartSummaryComponent(BaseComponent):
         self.total_quantity = Text(self.container.locator("div.goods i"), 'Кол-во товаров')
         self.discount = Text(self.container.locator("div.discount").first.locator("span").last, 'Сумма скидок')
 
-        self.promocode_input = Input(self.container.get_by_placeholder('Введите промокод'), 'Введите промокод')
+        self.promocode_input = Input(self.container.get_by_placeholder('Сертификат / промокод'), 'Введите промокод')
         self.button_promocode = Button(self.container.get_by_role('button', name='Применить'), 'Применить')
 
         self.checkout_button = Link(self.container.get_by_role('link', name='Перейти к оформлению'), 'Перейти к оформлению')
