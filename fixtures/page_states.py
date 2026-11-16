@@ -47,7 +47,7 @@ def cart_with_1_product(
     product_page: ProductPage,
     cart_page: CartPage,
 ):
-    opened_catalog_page.open_product_card_random()
+    opened_catalog_page.open_product_card_by_index(2)
 
     product_page.check_current_url()
     product_page.check_elements()
