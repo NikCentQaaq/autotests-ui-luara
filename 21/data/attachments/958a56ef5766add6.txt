@@ -1,0 +1,4 @@
+INFO     BasePage:base_page.py:27 Открытие URL "https://luara-art.ru/catalog"
+INFO     BasePage:base_page.py:51 Проверка соответствует ли текущий URL шаблону catalog
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Телефон" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Телефон" виден
