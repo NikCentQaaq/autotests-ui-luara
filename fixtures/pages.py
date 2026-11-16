@@ -1,8 +1,11 @@
 import pytest
 from playwright.sync_api import Page
 
+from pages.aktsii_page import AktsiiPage
 from pages.cart_page import CartPage
 from pages.catalog_page import CatalogPage
+from pages.login_page import LoginPage
+from pages.magazines_page import MagazinesPage
 from pages.main_page import MainPage
 from pages.product_page import ProductPage
 from pages.search_page import SearchPage
@@ -28,6 +31,19 @@ def cart_page(page: Page) -> CartPage:
 @pytest.fixture
 def search_page(page: Page) -> SearchPage:
     return SearchPage(page=page)
+
+@pytest.fixture
+def aktsii_page(page: Page) -> AktsiiPage:
+    return AktsiiPage(page=page)
+
+@pytest.fixture
+def login_page(page: Page) -> LoginPage:
+    return LoginPage(page=page)
+
+@pytest.fixture
+def magazines_page(page: Page) -> MagazinesPage:
+    return MagazinesPage(page=page)
+
 
 
 

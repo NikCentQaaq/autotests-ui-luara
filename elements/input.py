@@ -48,3 +48,15 @@ class Input(BaseElement):
             logger.info(step)
 
             expect(locator).to_have_value(value)
+
+
+
+    def check_placeholder(self, value: str, nth: int=0):
+        step = f'Проверка Плейсхолдера {self.type_of} "{self.name}" имеет значение {value}'
+
+        with allure.step(step):
+            locator = self.get_locator(nth)
+            logger.info(step)
+
+            expect(locator).to_have_attribute("placeholder", value)
+

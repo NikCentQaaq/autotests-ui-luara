@@ -50,7 +50,7 @@ class HeaderComponent(BaseComponent):
 
     @allure.step("Открытие страницы Авторизации")
     def open_login_page(self):
-        self.middle_header.click_logo()
+        self.middle_header.click_login()
 
     @allure.step("Открытие страницы Акций")
     def open_aktsii_page(self):

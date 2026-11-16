@@ -29,7 +29,7 @@ class TestHeaderNavigation:
         opened_main_page.header.open_cart_page()
 
         cart_page.check_current_url()
-        cart_page.check_elements()
+        cart_page.check_cart_is_empty()
 
 
     @allure.title("Переход на страницу авторизации")

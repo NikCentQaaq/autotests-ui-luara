@@ -27,15 +27,24 @@ class LoginPage(BasePage):
 
         self.alert = Text(page.get_by_role("alert"),"Неверный логин или пароль.")
 
+
+
     @allure.step("Проверка элементов страницы Авторизации")
     def check_elements(self):
         self.header.check_elements()
 
         self.check_element_text_by_name(self.title)
         self.check_element_text_by_name(self.description)
-        self.check_element_text_by_name(self.input_login)
-        self.check_element_text_by_name(self.input_password)
+
+        self.input_login.check_visible()
+        self.input_login.check_placeholder('Логин')
+
+        self.input_password.check_visible()
+        self.input_password.check_placeholder('Пароль')
+
         self.check_element_text_by_name(self.login_button)
+
+
 
     @allure.step("Ввод логина: {value}")
     def login_input(self, value: str):
