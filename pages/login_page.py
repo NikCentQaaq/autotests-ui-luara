@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 from components.headers.header_component import HeaderComponent
@@ -26,7 +27,7 @@ class LoginPage(BasePage):
 
         self.alert = Text(page.get_by_role("alert"),"Неверный логин или пароль.")
 
-
+    @allure.step("Проверка элементов страницы Авторизации")
     def check_elements(self):
         self.header.check_elements()
 
@@ -36,23 +37,25 @@ class LoginPage(BasePage):
         self.check_element_text_by_name(self.input_password)
         self.check_element_text_by_name(self.login_button)
 
-
+    @allure.step("Ввод логина: {value}")
     def login_input(self, value: str):
         self.input_login.fill(value)
 
+    @allure.step("Ввод пароля")
     def password_input(self, value: str):
         self.input_password.fill(value)
 
+    @allure.step("Нажатие кнопки «Войти»")
     def click_login_button(self):
         self.login_button.click()
 
-
+    @allure.step("Авторизация пользователя")
     def fill_login_form(self, login: str, password: str):
         self.login_input(login)
         self.password_input(password)
         self.login_button.click()
 
-
+    @allure.step("Проверка сообщения об ошибке авторизации")
     def check_alert_wrong_data(self):
         self.check_element_text_by_name(self.alert)
 

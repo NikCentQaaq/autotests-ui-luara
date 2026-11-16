@@ -58,7 +58,7 @@ def cart_with_1_product(
     product_page.check_popup_success_add()
     product_page.check_num_cart_into_header(1)
 
-    product_page.header.open_cart()
+    product_page.header.open_cart_page()
 
     cart_page.check_current_url()
     cart_page.wait_items_loaded()

@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 from components.headers.header_component import HeaderComponent
@@ -9,7 +10,7 @@ from tools.enums.routes import Rout
 
 class AktsiiPage(BasePage):
 
-    ROUTE = Rout.LOGIN
+    ROUTE = Rout.AKTSII
 
     def __init__(self, page: Page):
         super().__init__(page)
@@ -25,6 +26,7 @@ class AktsiiPage(BasePage):
 
 
 
+    @allure.step("Проверка элементов страницы акций")
     def check_elements(self):
         self.header.check_elements()
 

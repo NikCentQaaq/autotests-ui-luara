@@ -60,6 +60,11 @@ class MiddleHeaderComponent(BaseComponent):
     def click_logo(self):
         self.logo.click()
 
+    @allure.step('Нажатие на "Войти"')
+    def click_login(self):
+        self.login.click()
+
+
 
 
 

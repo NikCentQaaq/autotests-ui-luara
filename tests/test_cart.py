@@ -31,7 +31,7 @@ class TestCart:
         opened_product.check_popup_success_add()
         opened_product.check_num_cart_into_header(1)
 
-        opened_product.header.open_cart()
+        opened_product.header.open_cart_page()
 
         cart_page.check_current_url()
         cart_page.check_elements()

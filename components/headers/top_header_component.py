@@ -37,6 +37,17 @@ class TopHeaderComponent(BaseComponent):
         self.check_element_text_by_name(self.contacts)
         self.check_element_text_by_name(self.vacancies)
 
+    @allure.step('Нажатие на "Акции"')
+    def click_promo(self):
+        self.promo.click()
+
+    @allure.step('Нажатие на "Магазины"')
+    def click_shops(self):
+        self.shops.click()
+
+
+
+
 
 
 

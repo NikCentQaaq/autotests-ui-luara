@@ -29,7 +29,7 @@ class MagazinesPage(BasePage):
         for i in range(count):
             self.city.check_visible(nth=i)
 
-
+    @allure.step("Проверка элементов страницы Магазинов")
     def check_elements(self):
         self.header.check_elements()
         self.check_element_text_by_name(self.title)

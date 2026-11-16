@@ -23,7 +23,7 @@ class HeaderComponent(BaseComponent):
         self.top_panel.check_elements()
 
     @allure.step("Открытие корзины")
-    def open_cart(self):
+    def open_cart_page(self):
         self.middle_header.click_cart()
 
 
@@ -47,6 +47,19 @@ class HeaderComponent(BaseComponent):
     @allure.step("Открытие главной страницы")
     def open_main_page(self):
         self.middle_header.click_logo()
+
+    @allure.step("Открытие страницы Авторизации")
+    def open_login_page(self):
+        self.middle_header.click_logo()
+
+    @allure.step("Открытие страницы Акций")
+    def open_aktsii_page(self):
+        self.top_header.click_promo()
+
+    @allure.step("Открытие страницы Магазинов")
+    def open_magazines_page(self):
+        self.top_header.click_shops()
+
 
 
 
