@@ -43,6 +43,9 @@ class SizeProductComponent(BaseComponent):
         if self.split.get_locator().is_visible(timeout=1000):
             self.split.check_visible()
 
+        print(self.container.evaluate("el => el.outerHTML"))
+        print("active =", self.active_size.count())
+
         count = self.size.count()
         index = randrange(count)
         size = self.size.nth(index)
@@ -64,15 +67,35 @@ class SizeProductComponent(BaseComponent):
     @allure.step("Выбор размера при необходимости")
     def select_size_if_needed(self):
 
-        if self.size.count() == 0:  # Размеров нет
+        # Размеров нет
+        if self.size.count() == 0:
             return
 
-        if self.active_size.count() > 0:   # Размер 1 и он уже выбран
+        # Уже есть выбранный размер
+        try:
+            expect(self.active_size).to_have_count(1, timeout=1000)
+
             with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
                 return
 
-        # Размеры есть, но ни один не выбран
+        except AssertionError:
+            pass
+
+        # Размеров несколько, но ни один не выбран
         self.select_random_size()
+
+
+
+
+        # if self.size.count() == 0:  # Размеров нет
+        #     return
+        #
+        # if self.active_size.count() > 0:   # Размер 1 и он уже выбран
+        #     with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
+        #         return
+        #
+        # # Размеры есть, но ни один не выбран
+        # self.select_random_size()
 
 
 
