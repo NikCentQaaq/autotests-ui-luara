@@ -1,0 +1,1 @@
+INFO     BasePage:base_page.py:30 Открытие URL "https://luara-art.ru/catalog"
