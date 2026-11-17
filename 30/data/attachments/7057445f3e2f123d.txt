@@ -1,0 +1,8 @@
+INFO     BasePage:base_page.py:30 Открытие URL "https://luara-art.ru/"
+INFO     BasePage:base_page.py:47 Проверка соответствует ли текущий URL шаблону luara-art\.ru
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Top Header" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Container "Top Header" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Middle Header" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Container "Middle Header" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Панель "Клуб привилегий"" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Link "Панель "Клуб привилегий"" виден
