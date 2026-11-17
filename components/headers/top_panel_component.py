@@ -10,7 +10,7 @@ class TopPanelComponent(BaseComponent):
         super().__init__(page)
 
         self.img_panel = Link(page.get_by_role("link",name="Клуб привилегий LUARA"), 'Панель "Клуб привилегий"')
-        self.close_button = Button(page.locator('div.close'), 'Закрыть панель')
+        self.close_button = Button(page.get_by_role("button", name="Закрыть"), 'Закрыть')
 
 
     def check_elements(self):

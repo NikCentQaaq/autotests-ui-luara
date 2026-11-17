@@ -5,10 +5,14 @@ from config import settings
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.personal_page import PersonalPage
+from tools.enums.allure_enum import AllureEpic, AllureFeature, AllureStory
 
 
+@allure.epic(AllureEpic.UI)
+@allure.feature(AllureFeature.AUTHORIZATION)
 class TestLogin:
 
+    @allure.story(AllureStory.LOGIN)
     @allure.title('Успешная авторизация')
     @pytest.mark.smoke
     def test_success_login(self, opened_main_page: MainPage, login_page: LoginPage, personal_page: PersonalPage):
@@ -25,6 +29,7 @@ class TestLogin:
 
 
 
+    @allure.story(AllureStory.INVALID_LOGIN)
     @allure.title("Авторизация с некорректными учетными данными")
     @pytest.mark.regression
     @pytest.mark.negative
@@ -39,6 +44,8 @@ class TestLogin:
         opened_login_page.check_alert_wrong_data()
 
 
+
+    @allure.story(AllureStory.INVALID_LOGIN)
     @allure.title("Авторизация с пустыми обязательными полями")
     @pytest.mark.regression
     @pytest.mark.negative
@@ -50,6 +57,14 @@ class TestLogin:
         opened_login_page.fill_login_form(login=login, password=password)
 
         opened_login_page.check_loaded()
+
+
+
+
+
+
+    def test_logout(self):
+        pass
 
 
 

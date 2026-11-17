@@ -3,10 +3,18 @@ import pytest
 
 from pages.cart_page import CartPage
 from pages.product_page import ProductPage
+from tools.enums.allure_enum import AllureEpic, AllureFeature, AllureStory
 
 
+
+
+@allure.epic(AllureEpic.UI)
+@allure.feature(AllureFeature.CART)
 class TestCart:
 
+
+
+    @allure.story(AllureStory.ADD_TO_CART)
     @allure.title('Добавление товара в корзину из карточки товара')
     @pytest.mark.smoke
     @pytest.mark.parametrize(
@@ -19,9 +27,6 @@ class TestCart:
     )
     @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_add_1_product_to_cart(self, opened_product: ProductPage, cart_page: CartPage):
-
-        opened_product.check_current_url()
-
         opened_product.size.select_size_if_needed()
 
         product = opened_product.get_product_info()
@@ -45,6 +50,10 @@ class TestCart:
         cart_page.check_total_price(product["price_quantity"])
         cart_page.check_item_quantity(0, 1)
 
+
+
+
+    @allure.story(AllureStory.DELETE_PRODUCT)
     @allure.title('Удаление товара из корзины')
     @pytest.mark.smoke
     def test_delete_product_from_cart(self, cart_one_product: CartPage):
@@ -56,8 +65,9 @@ class TestCart:
 
 
 
+    @allure.story(AllureStory.CHANGE_QUANTITY)
     @allure.title("Увеличение количества товара в корзине")
-    @pytest.mark.smoke
+    @pytest.mark.regression
     def test_plus_product_quantity(self, cart_one_product: CartPage):
 
         old_quantity = cart_one_product.get_item_quantity(0)
@@ -71,8 +81,9 @@ class TestCart:
 
 
 
+    @allure.story(AllureStory.CHANGE_QUANTITY)
     @allure.title("Уменьшение количества товара в корзине")
-    @pytest.mark.smoke
+    @pytest.mark.regression
     def test_minus_product_quantity(self, cart_two_quantity: CartPage):
 
         old_quantity = cart_two_quantity.get_item_quantity(0)
@@ -85,8 +96,10 @@ class TestCart:
 
 
 
+
+    @allure.story(AllureStory.CART_PRICE)
     @allure.title("Пересчет итоговой стоимости корзины после увеличения количества товара на 1")
-    @pytest.mark.smoke
+    @pytest.mark.regression
     @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_cart_price_after_plus_1_quantity(self, cart_one_product: CartPage):
 
@@ -101,8 +114,9 @@ class TestCart:
 
 
 
+    @allure.story(AllureStory.CART_PRICE)
     @allure.title("Пересчет итоговой стоимости корзины после уменьшения количества товара на 1")
-    @pytest.mark.smoke
+    @pytest.mark.regression
     @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_cart_price_after_minus_1_quantity(self, cart_two_quantity: CartPage):
 

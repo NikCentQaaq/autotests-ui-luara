@@ -5,9 +5,15 @@ from pages.catalog_page import CatalogPage
 from pages.main_page import MainPage
 from pages.product_page import ProductPage
 from pages.search_page import SearchPage
+from tools.enums.allure_enum import AllureEpic, AllureFeature, AllureStory
 from tools.enums.category import Category
 
 
+
+
+@allure.epic(AllureEpic.UI)
+@allure.feature(AllureFeature.PRODUCT)
+@allure.story(AllureStory.OPEN_PRODUCT)
 class TestProduct:
 
     @allure.title("Открытие карточки товара из каталога")

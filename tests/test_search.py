@@ -3,8 +3,12 @@ import pytest
 
 from pages.main_page import MainPage
 from pages.search_page import SearchPage
+from tools.enums.allure_enum import AllureEpic, AllureFeature, AllureStory
 
 
+@allure.epic(AllureEpic.UI)
+@allure.feature(AllureFeature.SEARCH)
+@allure.story(AllureStory.SEARCH)
 class TestSearch:
 
 

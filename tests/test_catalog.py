@@ -4,14 +4,18 @@ import pytest
 
 from pages.catalog_page import CatalogPage
 from pages.main_page import MainPage
+from tools.enums.allure_enum import AllureEpic, AllureFeature, AllureStory
 from tools.enums.category import Category
 from tools.enums.routes import UrlPattern
 from tools.enums.sort_type import SortType
 
-
+@allure.epic(AllureEpic.UI)
+@allure.feature(AllureFeature.CATALOG)
 class TestCatalog:
 
+    @allure.story(AllureStory.OPEN_CATEGORY)
     @allure.title('Открытие категории через блок каталога на главной странице')
+    @pytest.mark.smoke
     @pytest.mark.regression
     @pytest.mark.parametrize(
         "catalog_category, product_category",
@@ -29,7 +33,6 @@ class TestCatalog:
             catalog_category: Category,
             product_category: Category
     ):
-
         opened_main_page.open_category(catalog_category)
 
         catalog_page.check_current_url()
@@ -40,8 +43,7 @@ class TestCatalog:
 
 
 
-
-
+    @allure.story(AllureStory.SORT)
     @pytest.mark.regression
     @allure.title('Сортировка продуктов в Каталоге')
     @pytest.mark.parametrize(
@@ -54,10 +56,12 @@ class TestCatalog:
     def test_sort_products(self, sort_type:SortType, opened_catalog_page: CatalogPage):
 
         opened_catalog_page.sort_products_by_value(sort_type)
-        opened_catalog_page.check_current_url()
+        opened_catalog_page.check_current_url_expected(re.compile(sort_type.url))
 
 
 
+
+    @allure.story(AllureStory.SORT)
     @allure.title("Сортировка товаров по цене")
     @pytest.mark.regression
     @pytest.mark.xfail(reason="BUG: Некорректная сортировка товаров по цене на сайте")
@@ -73,6 +77,4 @@ class TestCatalog:
             opened_catalog_page.check_prices_sorted_asc()
         else:
             opened_catalog_page.check_prices_sorted_desc()
-
-
 

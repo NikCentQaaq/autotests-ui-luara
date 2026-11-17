@@ -15,3 +15,4 @@ class SortType(StrEnum):
             SortType.PRICE_ASC: r".*\?PRICE=asc",
             SortType.PRICE_DESC: r".*\?PRICE=desc",
         }[self]
+        # ВОЗВРАТ 1 ЗНАЧЕНИЯ
