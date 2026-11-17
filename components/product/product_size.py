@@ -21,12 +21,6 @@ class SizeProductComponent(BaseComponent):
         self.split = Text(page.get_by_test_id('split-payment-amount'), 'Яндекс Сплит')
 
 
-    # @allure.step('Проверка видимости Размеров')
-    # def is_visible(self) -> bool:
-    #     return self.container.is_visible(timeout=1000)
-
-
-
     @allure.step("Получение выбранного размера")
     def get_selected_size(self) -> str:
 

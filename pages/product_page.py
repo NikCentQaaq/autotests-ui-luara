@@ -31,6 +31,9 @@ class ProductPage(BasePage):
 
         self.articul = Text(page.get_by_text('Арт:'), 'Артикул')
 
+
+
+
     @allure.step("Проверка уведомления об успешном добавлении товара")
     def check_popup_success_add(self):
         locator = self.popup_success_add_product.get_locator()
@@ -71,6 +74,10 @@ class ProductPage(BasePage):
 
     @allure.step("Добавление товара в корзину")
     def add_product_to_cart(self):
+        if self.size.split.get_locator().is_visible(timeout=1000):
+            self.size.split.check_visible()
+
+
         self.add_button.click()
         expect(self.header.middle_header.num_cart.get_locator()).not_to_have_text("0")
 
