@@ -53,19 +53,27 @@ class SizeProductComponent(BaseComponent):
     @allure.step("Выбор размера при необходимости")
     def select_size_if_needed(self):
 
+        print("sizes:", self.size.count())
+        print("active:", self.active_size.count())
+
         # Размеров нет
         if self.size.count() == 0:
             return
 
         # Уже есть выбранный размер
-        try:
-            expect(self.active_size).to_have_count(1, timeout=1000)
-
+        if self.size.count() == 1:
             with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
                 return
 
-        except AssertionError:
-            pass
+
+        # try:
+        #     expect(self.active_size).to_have_count(1, timeout=1000)
+        #
+        #     with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
+        #         return
+        #
+        # except AssertionError:
+        #     pass
 
         # Размеров несколько, но ни один не выбран
         self.select_random_size()
