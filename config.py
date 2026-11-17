@@ -1,7 +1,7 @@
 from enum import StrEnum
 from typing import Self, Any
 
-from pydantic import HttpUrl, DirectoryPath, FilePath
+from pydantic import HttpUrl, DirectoryPath, FilePath, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,6 +9,11 @@ class Browser(StrEnum):
     CHROMIUM = "chromium"
     FIREFOX = "firefox"
     WEBKIT = "webkit"
+
+
+class UserData(BaseModel):
+    login: str
+    password: str
 
 
 
@@ -31,6 +36,8 @@ class Settings(BaseSettings):
     tracing_dir: DirectoryPath
     allure_results_dir: DirectoryPath
     browser_state_file: FilePath
+
+    user: UserData
 
 
     @classmethod

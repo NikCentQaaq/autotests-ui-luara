@@ -1,9 +1,11 @@
-import re
 import pytest
 
+from config import settings
 from pages.cart_page import CartPage
 from pages.catalog_page import CatalogPage
+from pages.login_page import LoginPage
 from pages.main_page import MainPage
+from pages.personal_page import PersonalPage
 from pages.product_page import ProductPage
 from pages.search_page import SearchPage
 
@@ -12,15 +14,13 @@ from pages.search_page import SearchPage
 def opened_catalog_page(catalog_page: CatalogPage):
 
     catalog_page.open()
-    catalog_page.check_current_url()
-    catalog_page.check_elements_without_filter()
+    catalog_page.check_loaded_without_filter()
     return catalog_page
 
 @pytest.fixture
 def opened_main_page(main_page: MainPage):
     main_page.open()
-    main_page.check_current_url_expected(re.compile(r"luara-art\.ru"))
-    main_page.check_elements()
+    main_page.check_loaded()
     return main_page
 
 
@@ -32,63 +32,68 @@ def opened_product(
         opened_catalog_page: CatalogPage,
         product_page: ProductPage
 ):
-    index = request.param
-
+    index = getattr(request, "param", 13)
     opened_catalog_page.open_product_card_by_index(index)
-    product_page.check_current_url()
-    product_page.check_elements()
+
+    product_page.check_loaded()
     return product_page
 
 
-
 @pytest.fixture
-def cart_with_1_product(
-    opened_catalog_page: CatalogPage,
-    product_page: ProductPage,
-    cart_page: CartPage,
-):
-    opened_catalog_page.open_product_card_by_index(2)
+def cart_one_product(opened_product: ProductPage, cart_page: CartPage):
 
-    product_page.check_current_url()
-    product_page.check_elements()
+    opened_product.add_to_cart()
+    opened_product.check_num_cart_into_header(1)
+    opened_product.header.open_cart_page()
 
-    product_page.size.select_size_if_needed()
-
-    product_page.add_product_to_cart()
-    product_page.check_popup_success_add()
-    product_page.check_num_cart_into_header(1)
-
-    product_page.header.open_cart_page()
-
-    cart_page.check_current_url()
     cart_page.wait_items_loaded()
-    cart_page.check_elements()
+    cart_page.check_loaded()
 
     return cart_page
 
 
 
 @pytest.fixture
-def cart_with_2_items_products(cart_with_1_product: CartPage):
+def cart_two_quantity(cart_one_product: CartPage):
 
-    cart_with_1_product.plus_quantity_item(0)
+    cart_one_product.plus_quantity_item(0)
 
-    cart_with_1_product.check_item_quantity(0, 2)
-    cart_with_1_product.header.check_quantity(2)
+    cart_one_product.check_item_quantity(0, 2)
+    cart_one_product.header.check_quantity(2)
 
-    return cart_with_1_product
+    return cart_one_product
 
 
 
 @pytest.fixture
-def opened_search_page(opened_main_page: MainPage  ,search_page: SearchPage):
-    opened_main_page.header.search('Браслет')
+def search_results_page(request,
+        opened_main_page: MainPage,
+        search_page: SearchPage
+    ):
+    text = getattr(request, "param", "Браслет")
 
-    search_page.check_current_url()
-    search_page.check_elements()
-    search_page.check_search_results_by_name('Браслет')
+    opened_main_page.header.search(text)
 
+    search_page.check_loaded()
+    search_page.check_search_results_by_name(text)
     return search_page
+
+
+
+@pytest.fixture
+def opened_login_page(opened_main_page: MainPage, login_page: LoginPage):
+    opened_main_page.header.open_login_page()
+    login_page.check_loaded()
+    return login_page
+
+
+@pytest.fixture
+def opened_personal_page(opened_login_page: LoginPage, personal_page: PersonalPage):
+    opened_login_page.fill_login_form(login=settings.user.login, password=settings.user.password)
+
+    personal_page.check_loaded()
+
+
 
 
 

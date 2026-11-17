@@ -7,6 +7,7 @@ from pages.catalog_page import CatalogPage
 from pages.login_page import LoginPage
 from pages.magazines_page import MagazinesPage
 from pages.main_page import MainPage
+from pages.personal_page import PersonalPage
 from pages.product_page import ProductPage
 from pages.search_page import SearchPage
 
@@ -43,6 +44,10 @@ def login_page(page: Page) -> LoginPage:
 @pytest.fixture
 def magazines_page(page: Page) -> MagazinesPage:
     return MagazinesPage(page=page)
+
+@pytest.fixture
+def personal_page(page: Page) -> PersonalPage:
+    return PersonalPage(page=page)
 
 
 

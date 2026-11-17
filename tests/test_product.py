@@ -23,19 +23,11 @@ class TestProduct:
 
     @allure.title("Открытие карточки товара из результатов Поиска")
     @pytest.mark.smoke
-    def test_open_product_from_search(self, opened_search_page: SearchPage, product_page: ProductPage):
-        opened_search_page.open_product_card_by_index(0)
+    def test_open_product_from_search(self, search_results_page: SearchPage, product_page: ProductPage):
+        search_results_page.open_product_card_by_index(0)
 
         product_page.check_current_url()
         product_page.check_elements()
-
-
-
-
-
-
-
-
 
 
 

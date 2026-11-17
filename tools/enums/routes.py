@@ -10,6 +10,7 @@ class Rout(StrEnum):
     LOGIN = "/login"
     AKTSII = "/aktsii"
     MAGAZINES = "/magazines"
+    PERSONAL = "/personal"
 
 
 

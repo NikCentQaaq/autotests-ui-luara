@@ -68,3 +68,11 @@ class BasePage:
             element.check_visible()
             element.check_have_text(text)
 
+    def check_elements(self):
+        pass
+
+    @allure.step('Проверка загрузки страницы')
+    def check_loaded(self):
+        self.check_current_url()
+        self.check_elements()
+

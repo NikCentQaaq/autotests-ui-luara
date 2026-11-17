@@ -21,7 +21,6 @@ class SearchPage(ProductListPage):
 
     @allure.step('Проверка элементов страницы Поиска')
     def check_elements(self):
-        self.header.check_elements()
         self.check_element_text_by_name(self.title)
         self.check_cards_visible()
 

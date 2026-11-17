@@ -5,6 +5,7 @@ from components.cart.cart_item_component import CartItemComponent
 from components.cart.cart_summary_component import CartSummaryComponent
 from components.cart.empty_cart_component import EmptyCartComponent
 from components.headers.header_component import HeaderComponent
+from elements.container import Container
 from elements.text import Text
 from pages.base_page import BasePage
 from tools.enums.routes import Rout
@@ -25,20 +26,19 @@ class CartPage(BasePage):
 
 
         self.title = Text(page.get_by_text('Корзина'), "Корзина")
-        self.gift = page.locator("div.basket-block_item.is-gift")
+        self.gift = Container(page.locator("div.basket-block_item.is-gift"), 'Блок Подарок')
 
 
 
 
     @allure.step("Проверка элементов страницы корзины")
     def check_elements(self):
-        self.header.check_elements()
         self.summary.check_elements()
         self.title.check_visible()
         self.title.check_contain_text('Корзина')
 
         self.check_items_visible()
-        expect(self.gift).to_be_visible()
+        self.gift.check_visible()
 
 
 

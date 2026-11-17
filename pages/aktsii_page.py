@@ -28,7 +28,6 @@ class AktsiiPage(BasePage):
 
     @allure.step("Проверка элементов страницы акций")
     def check_elements(self):
-        self.header.check_elements()
 
         self.check_element_text_by_name(self.title)
         self.podarok_za_otziv.check_visible()

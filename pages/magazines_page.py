@@ -31,6 +31,5 @@ class MagazinesPage(BasePage):
 
     @allure.step("Проверка элементов страницы Магазинов")
     def check_elements(self):
-        self.header.check_elements()
         self.check_element_text_by_name(self.title)
         self.check_cities()

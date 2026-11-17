@@ -26,7 +26,7 @@ class TestCart:
 
         product = opened_product.get_product_info()
 
-        opened_product.add_product_to_cart()
+        opened_product.click_add_button()
 
         opened_product.check_popup_success_add()
         opened_product.check_num_cart_into_header(1)
@@ -47,72 +47,73 @@ class TestCart:
 
     @allure.title('Удаление товара из корзины')
     @pytest.mark.smoke
-    def test_delete_product_from_cart(self, cart_with_1_product: CartPage):
+    def test_delete_product_from_cart(self, cart_one_product: CartPage):
 
-        cart_with_1_product.delete_item(index=0)
+        cart_one_product.delete_item(index=0)
 
-        cart_with_1_product.check_cart_is_empty()
+        cart_one_product.check_cart_is_empty()
+        cart_one_product.check_current_url()
 
 
 
     @allure.title("Увеличение количества товара в корзине")
     @pytest.mark.smoke
-    def test_plus_product_quantity(self, cart_with_1_product: CartPage):
+    def test_plus_product_quantity(self, cart_one_product: CartPage):
 
-        old_quantity = cart_with_1_product.get_item_quantity(0)
-        old_header_cart_count = cart_with_1_product.header.get_num_cart()
+        old_quantity = cart_one_product.get_item_quantity(0)
+        old_header_cart_count = cart_one_product.header.get_num_cart()
 
-        cart_with_1_product.plus_quantity_item(0, 1)
+        cart_one_product.plus_quantity_item(0, 1)
 
-        cart_with_1_product.check_item_quantity(0, old_quantity + 1)
-        cart_with_1_product.header.check_quantity(old_header_cart_count + 1)
+        cart_one_product.check_item_quantity(0, old_quantity + 1)
+        cart_one_product.header.check_quantity(old_header_cart_count + 1)
 
 
 
 
     @allure.title("Уменьшение количества товара в корзине")
     @pytest.mark.smoke
-    def test_minus_product_quantity(self, cart_with_2_items_products: CartPage):
+    def test_minus_product_quantity(self, cart_two_quantity: CartPage):
 
-        old_quantity = cart_with_2_items_products.get_item_quantity(0)
+        old_quantity = cart_two_quantity.get_item_quantity(0)
 
-        old_num_cart_header = cart_with_2_items_products.header.get_num_cart()
+        old_num_cart_header = cart_two_quantity.header.get_num_cart()
 
-        cart_with_2_items_products.minus_quantity_item(0, 1)
-        cart_with_2_items_products.check_item_quantity(0, old_quantity - 1)
-        cart_with_2_items_products.header.check_quantity(old_num_cart_header - 1)
+        cart_two_quantity.minus_quantity_item(0, 1)
+        cart_two_quantity.check_item_quantity(0, old_quantity - 1)
+        cart_two_quantity.header.check_quantity(old_num_cart_header - 1)
 
 
 
     @allure.title("Пересчет итоговой стоимости корзины после увеличения количества товара на 1")
     @pytest.mark.smoke
     @pytest.mark.flaky(reruns=2, reruns_delay=1)
-    def test_cart_price_after_plus_1_quantity(self, cart_with_1_product: CartPage):
+    def test_cart_price_after_plus_1_quantity(self, cart_one_product: CartPage):
 
-        product= cart_with_1_product.get_product_info(index=0)
-        old_total_price = cart_with_1_product.summary.get_total_price()
+        product= cart_one_product.get_product_info(index=0)
+        old_total_price = cart_one_product.summary.get_total_price()
 
-        cart_with_1_product.plus_quantity_item(index=0)
-        cart_with_1_product.check_item_quantity(0, product['quantity'] + 1)
+        cart_one_product.plus_quantity_item(index=0)
+        cart_one_product.check_item_quantity(0, product['quantity'] + 1)
 
-        cart_with_1_product.check_total_price(old_total_price + product['price'])
-        cart_with_1_product.check_total_quantity()
+        cart_one_product.check_total_price(old_total_price + product['price'])
+        cart_one_product.check_total_quantity()
 
 
 
     @allure.title("Пересчет итоговой стоимости корзины после уменьшения количества товара на 1")
     @pytest.mark.smoke
     @pytest.mark.flaky(reruns=2, reruns_delay=1)
-    def test_cart_price_after_minus_1_quantity(self, cart_with_2_items_products: CartPage):
+    def test_cart_price_after_minus_1_quantity(self, cart_two_quantity: CartPage):
 
-        product= cart_with_2_items_products.get_product_info(index=0)
-        old_total_price = cart_with_2_items_products.summary.get_total_price()
+        product= cart_two_quantity.get_product_info(index=0)
+        old_total_price = cart_two_quantity.summary.get_total_price()
 
-        cart_with_2_items_products.minus_quantity_item(index=0)
-        cart_with_2_items_products.check_item_quantity(0, product['quantity'] - 1)
+        cart_two_quantity.minus_quantity_item(index=0)
+        cart_two_quantity.check_item_quantity(0, product['quantity'] - 1)
 
-        cart_with_2_items_products.check_total_price(old_total_price - (product['price'] / 2))
-        cart_with_2_items_products.check_total_quantity()
+        cart_two_quantity.check_total_price(old_total_price - (product['price'] / 2))
+        cart_two_quantity.check_total_quantity()
 
 
 

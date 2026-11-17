@@ -17,10 +17,19 @@ class HeaderComponent(BaseComponent):
 
 
     @allure.step('Проверка компонентов Header')
-    def check_elements(self):
+    def check_elements(self, authorized: bool = False):
         self.top_header.check_elements()
-        self.middle_header.check_elements()
+        self.middle_header.check_elements(authorized)
         self.top_panel.check_elements()
+
+    @allure.step('Проверка видимости Шапки Сайта')
+    def visible_check(self):
+        self.top_header.container.check_visible()
+        self.middle_header.container.check_visible()
+        self.top_panel.img_panel.check_visible()
+
+
+
 
     @allure.step("Открытие корзины")
     def open_cart_page(self):

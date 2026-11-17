@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 
 from components.concern_catalog.concern_catalog_component import ConcernCatalogComponent
 from components.headers.header_component import HeaderComponent
-from elements.base_element import BaseElement
+from elements.container import Container
 from pages.base_page import BasePage
 from tools.enums.category import Category
 from tools.enums.routes import Rout
@@ -17,21 +17,19 @@ class MainPage(BasePage):
 
         self.header = HeaderComponent(page)
 
-        self.top_slider = BaseElement(page.locator('div.top-slider'), 'Баннер-Слайдер')
+        self.top_slider = Container(page.locator('div.top-slider'), 'Баннер-Слайдер')
 
         self.catalog_concern = ConcernCatalogComponent(page)
 
-        self.collection_block = BaseElement(page.locator('div.colection-block'), 'Блок коллекции')
-        self.trend_block = BaseElement(page.locator('div.trend-block'), 'Блок тренд')
-        self.sale_block = BaseElement(page.locator('div.sale-block'), 'Блок акции')
-        self.about_block = BaseElement(page.locator('div.about-stage'), 'Блок "О нас"')
+        self.collection_block = Container(page.locator('div.colection-block'), 'Блок коллекции')
+        self.trend_block = Container(page.locator('div.trend-block'), 'Блок тренд')
+        self.sale_block = Container(page.locator('div.sale-block'), 'Блок акции')
+        self.about_block = Container(page.locator('div.about-stage'), 'Блок "О нас"')
 
 
 
-
-    @allure.step('Проверка видимости Верхней навигационной панели (header)')
     def check_header(self):
-        self.header.check_elements()
+        self.header.visible_check()
 
     @allure.step('Проверка видимости блока Каталог')
     def check_catalog_concern(self):
@@ -47,9 +45,9 @@ class MainPage(BasePage):
 
     @allure.step("Проверка главной страницы")
     def check_elements(self):
-        self.check_header()
         self.check_catalog_concern()
         self.check_blocks()
+
 
 
 

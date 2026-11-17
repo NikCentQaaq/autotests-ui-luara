@@ -22,10 +22,17 @@ class CatalogPage(ProductListPage):
     def __init__(self, page: Page):
         super().__init__(page)
 
+        self.header = HeaderComponent(page)
         self.catalog_header = CatalogHeaderComponent(page)
 
         self.title_category = Text(page.locator('div.h1_b_cat h1'), 'Заголовок Категории')
         self.catalog_selected_filter = CatalogSelectedFilterComponent(page)
+
+
+    @allure.step('Проверка загрузки Страницы Каталога')
+    def check_loaded_without_filter(self):
+        self.check_current_url()
+        self.check_elements_without_filter()
 
 
 
@@ -39,14 +46,12 @@ class CatalogPage(ProductListPage):
 
     @allure.step('Проверка элементов Каталога Без фильтрации')
     def check_elements_without_filter(self):
-        self.header.check_elements()
         self.catalog_header.check_without_filter()
         self.check_cards_visible()
 
 
     @allure.step('Проверка элементов Каталога, отфильтрованного по Категории')
     def check_elements_filter_products(self):
-        self.header.check_elements()
         self.catalog_header.check_title_catalog_filter()
         self.title_category.check_visible()
 

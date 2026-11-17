@@ -36,10 +36,7 @@ class ProductPage(BasePage):
 
     @allure.step("Проверка уведомления об успешном добавлении товара")
     def check_popup_success_add(self):
-        locator = self.popup_success_add_product.get_locator()
-
-        expect(locator).to_be_visible()
-
+        self.popup_success_add_product.check_visible()
 
 
     @allure.step('Получение Артикула товара')
@@ -72,20 +69,24 @@ class ProductPage(BasePage):
             "size": self.size.get_selected_size()
         }
 
-    @allure.step("Добавление товара в корзину")
-    def add_product_to_cart(self):
-        if self.size.split.get_locator().is_visible(timeout=1000):
-            self.size.split.check_visible()
-
-
+    @allure.step("Нажатие кнопки 'Добавить в корзину'")
+    def click_add_button(self):
         self.add_button.click()
-        expect(self.header.middle_header.num_cart.get_locator()).not_to_have_text("0")
-
-
-
 
     def check_num_cart_into_header(self, expected_num: int):
         self.header.check_quantity(expected_num)
+
+
+
+    @allure.step("Добавление товара в корзину")
+    def add_to_cart(self):
+        self.size.select_size_if_needed()
+
+        if self.size.split.get_locator().is_visible(timeout=1000):
+            self.size.split.check_visible()
+
+        self.click_add_button()
+        self.check_popup_success_add()
 
 
 

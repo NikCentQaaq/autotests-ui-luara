@@ -1,21 +1,27 @@
 import allure
 import pytest
 
-from components.headers.header_component import HeaderComponent
-from fixtures.pages import main_page
 from pages.aktsii_page import AktsiiPage
-from pages.base_page import BasePage
 from pages.cart_page import CartPage
+from pages.catalog_page import CatalogPage
 from pages.login_page import LoginPage
 from pages.magazines_page import MagazinesPage
 from pages.main_page import MainPage
-from pages.product_page import ProductPage
 
 
 class TestHeaderNavigation:
 
+    @allure.title("Отображение всех элементов Шапки сайта")
+    def test_header_elements(self, opened_main_page: MainPage):
+        opened_main_page.header.top_header.check_elements()
+        opened_main_page.header.middle_header.check_elements()
+        opened_main_page.header.top_panel.check_elements()
+
+
+
+
     @allure.title("Переход на главную страницу по логотипу")
-    def test_open_main_page_from_header_logo(self, opened_catalog_page: ProductPage, main_page: MainPage):
+    def test_open_main_page_from_header_logo(self, opened_catalog_page: CatalogPage, main_page: MainPage):
         opened_catalog_page.header.open_main_page()
 
         main_page.check_current_url()

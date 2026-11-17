@@ -3,6 +3,7 @@ from playwright.sync_api import Page, expect
 from components.base_component import BaseComponent
 from components.concern_catalog.concern_card_component import CardConcernComponent
 from components.concern_catalog.concern_nav_component import NavConcernComponent
+from elements.container import Container
 from elements.text import Text
 import allure
 
@@ -13,20 +14,20 @@ class ConcernCatalogComponent(BaseComponent):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.container = page.locator("section.concern")
+        self.container = Container(page.locator("section.concern"), 'Блок "Каталог категорий"')
 
-        self.text_catalog = Text(self.container.get_by_text('Каталог'), 'Каталог')
-        self.title_catalog = Text(self.container.get_by_text('Украшения для особых моментов'), 'Заголовок каталога')
-        self.lead_catalog = Text(self.container.get_by_text('Выберите категорию и найдите своё идеальное украшение'), 'Описание каталога')
+        self.text_catalog = Text(page.locator('section.concern').get_by_text('Каталог'), 'Каталог')
+        self.title_catalog = Text(page.get_by_text('Украшения для особых моментов'), 'Заголовок каталога')
+        self.lead_catalog = Text(page.get_by_text('Выберите категорию и найдите своё идеальное украшение'), 'Описание каталога')
 
-        self.cards = self.container.locator("a.concern-card")  # 7 карточек
+        self.cards = page.locator("a.concern-card")  # 7 карточек
         self.nav = NavConcernComponent(page)
 
 
 
     @allure.step('Проверка видимости 5 карт')
     def check_visible_5_cards(self):
-        expect(self.container).to_be_visible()
+        self.container.check_visible()
         expect(self.cards).to_have_count(7)
         for i in range(5):  # отображается 4 элемента
             CardConcernComponent(self.page, self.cards.nth(i)).check_elements()
