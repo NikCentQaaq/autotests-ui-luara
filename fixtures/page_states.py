@@ -82,7 +82,7 @@ def search_results_page(request,
 
 @pytest.fixture
 def opened_login_page(opened_main_page: MainPage, login_page: LoginPage):
-    opened_main_page.header.open_login_page()
+    login_page.open()
     login_page.check_loaded()
     return login_page
 
