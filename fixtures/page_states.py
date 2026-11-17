@@ -89,7 +89,7 @@ def opened_login_page(opened_main_page: MainPage, login_page: LoginPage):
 
 @pytest.fixture
 def opened_personal_page(opened_login_page: LoginPage, personal_page: PersonalPage):
-    opened_login_page.fill_login_form(login=settings.user.login, password=settings.user.password)
+    opened_login_page.fill_login_form(login=settings.test_user.login, password=settings.test_user.password)
 
     personal_page.check_loaded()
 

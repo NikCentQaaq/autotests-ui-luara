@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     allure_results_dir: DirectoryPath
     browser_state_file: FilePath
 
-    user: UserData
+    test_user: UserData
 
 
     @classmethod

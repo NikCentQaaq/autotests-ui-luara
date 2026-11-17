@@ -13,7 +13,7 @@ class TestLogin:
         login_page.check_current_url()
         login_page.check_elements()
 
-        login_page.fill_login_form(login=settings.user.login, password=settings.user.password)
+        login_page.fill_login_form(login=settings.test_user.login, password=settings.test_user.password)
 
         personal_page.check_current_url()
         personal_page.check_elements()
