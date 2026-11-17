@@ -16,6 +16,9 @@ class SearchPage(ProductListPage):
 
         self.title = Text(page.get_by_text('Результаты поиска'), 'Результаты поиска')
 
+        self.empty_title = Text(page.get_by_role('heading', name='Результаты поиска'), 'Результаты поиска')
+        self.empty_description = Text(page.get_by_text('Сожалеем, но ничего не найдено.'), 'Сожалеем, но ничего не найдено.')
+
 
 
 
@@ -43,6 +46,12 @@ class SearchPage(ProductListPage):
             item = CardCatalogComponent(self.page, self.cards.nth(i))
             item.check_contains_articul(articul)
 
+
+
+    @allure.step("Проверка отсутствия результатов поиска")
+    def check_no_search_results(self):
+        self.check_element_text_by_name(self.empty_title)
+        self.empty_description.check_contain_text('Сожалеем, но ничего не найдено.')
 
 
 

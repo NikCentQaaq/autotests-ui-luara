@@ -62,9 +62,8 @@ class TestLogin:
 
 
 
-
-    def test_logout(self):
-        pass
+    # def test_logout(self, opened_personal_page: PersonalPage, ):
+    #     opened_personal_page.logout()
 
 
 

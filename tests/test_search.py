@@ -8,10 +8,10 @@ from tools.enums.allure_enum import AllureEpic, AllureFeature, AllureStory
 
 @allure.epic(AllureEpic.UI)
 @allure.feature(AllureFeature.SEARCH)
-@allure.story(AllureStory.SEARCH)
+
 class TestSearch:
 
-
+    @allure.story(AllureStory.SEARCH)
     @allure.title("Поиск товара по артикулу с главной страницы")
     @pytest.mark.parametrize('value', [
         pytest.param('BE19907', id='base', marks=pytest.mark.smoke),
@@ -27,10 +27,7 @@ class TestSearch:
 
         search_page.check_search_results_by_articul(value)
 
-
-
-
-
+    @allure.story(AllureStory.SEARCH)
     @allure.title("Поиск товара по названию с главной страницы")
     @pytest.mark.parametrize('value, value_product', [
         pytest.param('Кольцо', 'Кольцо', id='base', marks=pytest.mark.smoke),
@@ -41,13 +38,31 @@ class TestSearch:
         pytest.param('кольцо"', 'кольцо', id='partial', marks=pytest.mark.regression)
     ])
     def test_search_by_name(self, value, value_product: str, opened_main_page: MainPage, search_page: SearchPage):
-
         opened_main_page.header.search(value)
 
         search_page.check_current_url()
         search_page.check_elements()
 
         search_page.check_search_results_by_name(value_product)
+
+
+
+    @pytest.mark.regression
+    @pytest.mark.negative
+    @pytest.mark.parametrize('value', [
+        pytest.param('', id='empty search'),
+        pytest.param('кольфв', id='invalid search'),
+        pytest.param('!@#$', id='special symbols'),
+        pytest.param('💍', id='emoji'),
+        pytest.param('кольцо'*20, id='long string')
+    ])
+    def test_search_with_no_results(self, value, opened_main_page: MainPage, search_page: SearchPage):
+        opened_main_page.header.search(value)
+        search_page.check_current_url()
+        search_page.check_no_search_results()
+
+
+
 
 
 
