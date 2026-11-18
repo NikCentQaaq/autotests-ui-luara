@@ -49,6 +49,7 @@ class TestSearch:
 
     @pytest.mark.regression
     @pytest.mark.negative
+    @allure.title('Поиск по запросу без результатов')
     @pytest.mark.parametrize('value', [
         pytest.param('', id='empty search'),
         pytest.param('кольфв', id='invalid search'),
