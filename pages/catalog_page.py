@@ -2,7 +2,8 @@ import allure
 from playwright.sync_api import Page
 
 from components.catalog.card_catalog_component import CardCatalogComponent
-from components.catalog.filter_catalog import CatalogSelectedFilterComponent
+from components.catalog.filter_catalog.catalog_filter_component import CatalogSelectedFilterComponent
+from components.filter.filter_component import FilterComponent
 from components.headers.catalog_header_component import CatalogHeaderComponent
 from components.headers.header_component import HeaderComponent
 from elements.text import Text
@@ -21,6 +22,7 @@ class CatalogPage(ProductListPage):
 
         self.header = HeaderComponent(page)
         self.catalog_header = CatalogHeaderComponent(page)
+        self.filter = FilterComponent(page)
 
         self.title_category = Text(page.locator('div.h1_b_cat h1'), 'Заголовок Категории')
         self.catalog_selected_filter = CatalogSelectedFilterComponent(page)

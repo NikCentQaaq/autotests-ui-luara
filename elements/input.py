@@ -20,24 +20,14 @@ class Input(BaseElement):
 
 
 
-    def fill(self, value: str | int, nth: int=0):
+    def fill(self, value: str | int | float, nth: int=0):
         step = f'Ввод значения {value} в {self.type_of} "{self.name}" '
 
         with allure.step(step):
             locator = self.get_locator(nth)
             logger.info(step)
 
-            locator.fill(value)
-
-
-    def fill_locator_input(self, value: str | int, nth: int=0):
-        step = f'Ввод значения {value} в {self.type_of} "{self.name}" '
-
-        with allure.step(step):
-            locator = self.get_locator(nth).locator('input')
-            logger.info(step)
-
-            locator.fill(value)
+            locator.fill(str(value))
 
 
     def check_have_value(self, value: str | int, nth: int=0):
@@ -59,4 +49,16 @@ class Input(BaseElement):
             logger.info(step)
 
             expect(locator).to_have_attribute("placeholder", value)
+
+
+
+    def press(self, key: str, nth: int = 0):
+        step = f'Нажать клавишу "{key}" в поле "{self.name}"'
+
+        with allure.step(step):
+            locator = self.get_locator(nth)
+
+            logger.info(step)
+
+            locator.press(key)
 
