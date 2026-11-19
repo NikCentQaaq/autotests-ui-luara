@@ -92,6 +92,7 @@ def opened_personal_page(opened_login_page: LoginPage, personal_page: PersonalPa
     opened_login_page.fill_login_form(login=settings.test_user.login, password=settings.test_user.password)
 
     personal_page.check_loaded()
+    return personal_page
 
 
 

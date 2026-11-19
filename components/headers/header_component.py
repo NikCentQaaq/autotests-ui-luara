@@ -70,6 +70,14 @@ class HeaderComponent(BaseComponent):
         self.top_header.click_shops()
 
 
+    @allure.step('Проверка отображения кнопки "Войти"')
+    def check_login_visible(self):
+        self.middle_header.login.check_visible()
+
+    @allure.step('Проверка отображения кнопки личного кабинета')
+    def check_personal_visible(self):
+        self.middle_header.personal.check_visible()
+
 
 
 

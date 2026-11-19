@@ -60,11 +60,28 @@ class TestLogin:
 
 
 
+    @allure.story(AllureStory.LOGOUT)
+    @allure.title('Успешный выход из личного кабинета с последующим возвратом на главную страницу.')
+    @pytest.mark.smoke
+    def test_logout(self, opened_personal_page: PersonalPage, main_page: MainPage):
+        opened_personal_page.logout()
+
+        main_page.check_loaded()
+        main_page.check_elements()
+
+        main_page.header.check_login_visible()
 
 
-    # def test_logout(self, opened_personal_page: PersonalPage, ):
-    #     opened_personal_page.logout()
+    @allure.story(AllureStory.LOGOUT)
+    @allure.title('Отмена выхода из личного кабинета после нажатия кнопки "Остаться"')
+    @pytest.mark.regression
+    def test_cancel_logout(self, opened_personal_page: PersonalPage):
+        opened_personal_page.stay_after_click_logout()
 
+        opened_personal_page.check_loaded()
+        opened_personal_page.check_elements()
+
+        opened_personal_page.header.check_personal_visible()
 
 
 

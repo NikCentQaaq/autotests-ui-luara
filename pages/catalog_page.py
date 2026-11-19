@@ -1,14 +1,11 @@
-from random import randint
-
 import allure
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 from components.catalog.card_catalog_component import CardCatalogComponent
-from components.filter_catalog.catalog_filter_component import CatalogSelectedFilterComponent
+from components.catalog.filter_catalog import CatalogSelectedFilterComponent
 from components.headers.catalog_header_component import CatalogHeaderComponent
 from components.headers.header_component import HeaderComponent
 from elements.text import Text
-from pages.base_page import BasePage
 from pages.product_list_page import ProductListPage
 from tools.enums.category import Category
 from tools.enums.routes import Rout

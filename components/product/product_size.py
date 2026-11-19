@@ -61,9 +61,14 @@ class SizeProductComponent(BaseComponent):
             return
 
         # Уже есть выбранный размер
-        if self.size.count() == 1:
+        if self.active_size.count() == 1:
             with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
                 return
+
+        if self.size.count() == 1:
+            self.size.first.click()
+        else:
+            self.select_random_size()
 
 
         # try:
@@ -76,5 +81,4 @@ class SizeProductComponent(BaseComponent):
         #     pass
 
         # Размеров несколько, но ни один не выбран
-        self.select_random_size()
 
