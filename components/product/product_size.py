@@ -57,31 +57,35 @@ class SizeProductComponent(BaseComponent):
             expect(self.active_size).to_have_text(selected_size)
 
 
+
     @allure.step("Выбор размера при необходимости")
     def select_size_if_needed(self):
-
         count = self.size.count()
 
         if count == 0:
             return
 
         if self.active_size.count() == 1:
-            with allure.step(
-                    f'Размер "{self.get_selected_size()}" уже выбран'
-            ):
+            with allure.step(f'Размер "{self.get_selected_size()}" уже выбран'):
                 return
 
         if count == 1:
             size = self.size.first
 
-            size.click()
+            expect(size).to_be_visible()
+            expect(size).to_be_enabled()
 
-            expect(self.size.nth(index)).to_have_class(
-                re.compile(r"\bactive\b")
-            )
-            expect(self.active_size).to_have_count(1)
+            selected_size = size.inner_text().strip()
+
+            with allure.step(f'Выбран единственный размер "{selected_size}"'):
+                size.click()
+
+                expect(size).to_have_class(
+                    re.compile(r"\bactive\b")
+                )
+                expect(self.active_size).to_have_count(1)
+                expect(self.active_size).to_have_text(selected_size)
 
             return
 
         self.select_random_size()
-

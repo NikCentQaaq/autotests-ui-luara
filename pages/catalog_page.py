@@ -91,6 +91,23 @@ class CatalogPage(ProductListPage):
 
         return prices
 
+    @allure.step("Получение Списка названий товаров")
+    def get_products_names(self) -> list[str]:
+        names = []
+
+        for i in range(self.cards.count()):
+            card = CardCatalogComponent(self.page,self.cards.nth(i))
+            names.append(card.get_name())
+
+        return names
+
+    @allure.step('Проверка, что названия товаров содержат {value}')
+    def check_names_contain_text(self, value: str):
+        names = self.get_products_names()
+
+        for name in names:
+            assert value.lower() in name.lower(), f'Название товара {name} не содержит {value}'
+
 
     @allure.step("Проверка сортировки по возрастанию цены")
     def check_prices_sorted_asc(self):

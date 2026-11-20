@@ -18,8 +18,8 @@ class MetalFilterComponent(BaseComponent):
 
 
 
-    def checkbox(self, metall: str):
-        return Checkbox(self.container.get_by_role("checkbox", name=metall), metall)
+    def checkbox(self, metall: Metall):
+        return Checkbox(self.container.locator(f'[data-value="{metall}"] label').last, metall)
 
 
 

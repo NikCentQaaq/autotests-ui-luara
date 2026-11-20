@@ -3,6 +3,7 @@ import pytest
 
 from pages.catalog_page import CatalogPage
 from tools.enums.allure_enum import AllureStory, AllureEpic, AllureFeature
+from tools.enums.category import Metall
 
 
 @allure.epic(AllureEpic.UI)
@@ -37,6 +38,7 @@ class TestFilterCatalog:
 
     @allure.story(AllureStory.PRICE_FILTER)
     @allure.title("Фильтрация по диапазону цен без результатов")
+    @allure.description("Проверка отображения пустого каталога при выборе диапазона цен, для которого отсутствуют товары.")
     @pytest.mark.regression
     @pytest.mark.negative
     @pytest.mark.parametrize("min_price, max_price", [
@@ -55,6 +57,7 @@ class TestFilterCatalog:
 
 
     @allure.story(AllureStory.PRICE_FILTER)
+    @allure.title("Ввод некорректных символов в поле 'Цена от'")
     @pytest.mark.regression
     @pytest.mark.negative
     @pytest.mark.xfail(reason='Известная проблема: отсутствует валидация нечислового ввода в поле "Цена от"')
@@ -73,6 +76,7 @@ class TestFilterCatalog:
 
 
     @allure.story(AllureStory.PRICE_FILTER)
+    @allure.title("Ввод некорректных символов в поле 'Цена до'")
     @pytest.mark.regression
     @pytest.mark.negative
     @pytest.mark.xfail(reason='Известная проблема: отсутствует валидация нечислового ввода в поле "Цена до"')
@@ -86,6 +90,29 @@ class TestFilterCatalog:
         opened_catalog_page.filter.price.fill_max_price(max_price)
         opened_catalog_page.filter.click_show_result()
         opened_catalog_page.filter.price.check_max_price('')
+
+
+
+
+
+
+
+    @allure.story(AllureStory.METALL_FILTER)
+    @allure.title("Фильтрация по металлу изделий")
+    @pytest.mark.parametrize("metall, text_value, url", [
+        pytest.param(Metall.SILVER, 'серебр', Metall.SILVER.url_pattern, id='silver',marks=pytest.mark.smoke),
+        pytest.param(Metall.GOLD, 'золот', Metall.GOLD.url_pattern, id='gold', marks=pytest.mark.regression),
+        pytest.param(Metall.JEWELRY_ALLOY, '', Metall.JEWELRY_ALLOY.url_pattern, id='bijuteria', marks=pytest.mark.regression)])
+    def test_select_metall(self, metall: Metall, text_value:str , url: str, opened_catalog_page: CatalogPage):
+        opened_catalog_page.filter.select_metall(metall)
+
+        opened_catalog_page.filter.check_result_count()
+        opened_catalog_page.filter.click_show_result()
+
+        opened_catalog_page.check_current_url_expected(url)
+        opened_catalog_page.check_names_contain_text(text_value)
+
+
 
 
 

@@ -1,3 +1,4 @@
+import re
 from enum import StrEnum
 
 
@@ -21,3 +22,11 @@ class Metall(StrEnum):
     GOLD = "Золото"
     SILVER = "Серебро"
     JEWELRY_ALLOY = "Ювелирный сплав"
+
+    @property
+    def url_pattern(self):
+        return {
+            Metall.GOLD: re.compile(r".*/catalog/gold/?$"),
+            Metall.SILVER: re.compile(r".*/catalog/silver/?$"),
+            Metall.JEWELRY_ALLOY: re.compile(r".*/catalog/bijouterie/?$"),
+        }[self]
