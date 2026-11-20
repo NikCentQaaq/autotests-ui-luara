@@ -1,0 +1,48 @@
+INFO     BasePage:base_page.py:30 Открытие URL "https://luara-art.ru/catalog"
+INFO     BasePage:base_page.py:54 Проверка соответствует ли текущий URL шаблону catalog
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Ювелирные украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Ювелирные украшения" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Ювелирные украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Text "Ювелирные украшения" имеет текст "Ювелирные украшения"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Блок Фильтр" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что BaseElement "Блок Фильтр" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Сортировка" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Select "Сортировка" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:42 Клик Link "Название украшения"
+INFO     BasePage:base_page.py:54 Проверка соответствует ли текущий URL шаблону 
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Изображение" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Image "Изображение" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Название" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Цена" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Цена" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Добавить в корзину" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Добавить в корзину" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Добавить в корзину" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:78 Проверка, что Button "Добавить в корзину" содержит текст "Добавить в корзину"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Яндекс Сплит" с индексом "0"
+INFO     BasePage:base_page.py:30 Открытие URL "https://luara-art.ru/catalog"
+INFO     BasePage:base_page.py:54 Проверка соответствует ли текущий URL шаблону catalog
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Ювелирные украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Ювелирные украшения" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Ювелирные украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Text "Ювелирные украшения" имеет текст "Ювелирные украшения"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Блок Фильтр" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что BaseElement "Блок Фильтр" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Сортировка" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Select "Сортировка" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:42 Клик Link "Название украшения"
+INFO     BasePage:base_page.py:54 Проверка соответствует ли текущий URL шаблону 
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Изображение" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Image "Изображение" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Название" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Название" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Цена" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Цена" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Добавить в корзину" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Button "Добавить в корзину" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Добавить в корзину" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:78 Проверка, что Button "Добавить в корзину" содержит текст "Добавить в корзину"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Яндекс Сплит" с индексом "0"

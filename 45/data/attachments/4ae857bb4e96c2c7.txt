@@ -1,0 +1,20 @@
+INFO     BasePage:base_page.py:30 Открытие URL "https://luara-art.ru/catalog"
+INFO     BasePage:base_page.py:54 Проверка соответствует ли текущий URL шаблону catalog
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Ювелирные украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Text "Ювелирные украшения" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Ювелирные украшения" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:66 Проверка, что Text "Ювелирные украшения" имеет текст "Ювелирные украшения"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Блок Фильтр" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что BaseElement "Блок Фильтр" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Сортировка" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:54 Проверка, что Select "Сортировка" виден
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Максимальная цена" с индексом "0"
+INFO     INPUT:input.py:28 Ввод значения abc в Input "Максимальная цена" 
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Максимальная цена" с индексом "0"
+INFO     INPUT:input.py:61 Нажать клавишу "Enter" в поле "Максимальная цена"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Максимальная цена" с индексом "0"
+INFO     INPUT:input.py:38 Проверка, что Input "Максимальная цена" имеет значение abc
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Показать Результаты" с индексом "0"
+INFO     BASE_ELEMENT:base_element.py:42 Клик Button "Показать Результаты"
+INFO     BASE_ELEMENT:base_element.py:27 Получение локатора элемента "Максимальная цена" с индексом "0"
+INFO     INPUT:input.py:38 Проверка, что Input "Максимальная цена" имеет значение
