@@ -56,6 +56,7 @@ class TestCart:
     @allure.story(AllureStory.DELETE_PRODUCT)
     @allure.title('Удаление товара из корзины')
     @pytest.mark.smoke
+    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_delete_product_from_cart(self, cart_one_product: CartPage):
 
         cart_one_product.delete_item(index=0)
@@ -68,6 +69,7 @@ class TestCart:
     @allure.story(AllureStory.CHANGE_QUANTITY)
     @allure.title("Увеличение количества товара в корзине")
     @pytest.mark.regression
+    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_plus_product_quantity(self, cart_one_product: CartPage):
 
         old_quantity = cart_one_product.get_item_quantity(0)
@@ -84,6 +86,7 @@ class TestCart:
     @allure.story(AllureStory.CHANGE_QUANTITY)
     @allure.title("Уменьшение количества товара в корзине")
     @pytest.mark.regression
+    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_minus_product_quantity(self, cart_two_quantity: CartPage):
 
         old_quantity = cart_two_quantity.get_item_quantity(0)

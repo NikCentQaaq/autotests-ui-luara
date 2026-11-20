@@ -30,7 +30,7 @@ def opened_product(
         opened_catalog_page: CatalogPage,
         product_page: ProductPage
 ):
-    index = getattr(request, "param", 11)
+    index = getattr(request, "param", 12)
     opened_catalog_page.open_product_card_by_index(index)
 
     product_page.check_loaded()

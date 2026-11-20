@@ -76,7 +76,9 @@ class SizeProductComponent(BaseComponent):
 
             size.click()
 
-            expect(size).to_have_class(re.compile(r"\bactive\b"))
+            expect(self.size.nth(index)).to_have_class(
+                re.compile(r"\bactive\b")
+            )
             expect(self.active_size).to_have_count(1)
 
             return

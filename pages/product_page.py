@@ -25,7 +25,7 @@ class ProductPage(BasePage):
         self.image = Image(page.locator('img.img_body'), 'Изображение')
         self.name_product = Text(page.locator('div.bx h1.ttl'), 'Название')
         self.price = Text(page.locator('div.kc-current_price'), 'Цена')
-        self.add_button = Link(page.get_by_role('link', name='Добавить в корзину'), 'Добавить в корзину')
+        self.add_button = Button(page.get_by_role('link', name='Добавить в корзину'), 'Добавить в корзину')
 
         self.popup_success_add_product = Text(page.locator('div.notyf__message'), 'Товар успешно добавлен в корзину')
 
@@ -71,6 +71,9 @@ class ProductPage(BasePage):
 
     @allure.step("Нажатие кнопки 'Добавить в корзину'")
     def click_add_button(self):
+        self.add_button.check_visible()
+        self.add_button.check_enabled()
+
         self.add_button.click()
 
     def check_num_cart_into_header(self, expected_num: int):

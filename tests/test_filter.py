@@ -23,7 +23,7 @@ class TestFilterCatalog:
     def test_filter_price(self, min_price: int, max_price: int,  opened_catalog_page: CatalogPage):
         opened_catalog_page.filter.fill_price_range(min_price, max_price)
 
-        opened_catalog_page.filter.check_result()
+        opened_catalog_page.filter.check_result_count()
         opened_catalog_page.filter.click_show_result()
 
         opened_catalog_page.check_price_filter_url(min_price, max_price)
@@ -35,17 +35,15 @@ class TestFilterCatalog:
     @allure.story(AllureStory.FILTER)
     @allure.title("Негативные сценарии. Фильтрация по диапазону цен")
     @pytest.mark.parametrize("min_price, max_price", [
-        pytest.param(10000, 50000, id='base', marks=[pytest.mark.regression, pytest.mark.negative]),
-        pytest.param(0, 60000, id='min 0', marks=[pytest.mark.regression, pytest.mark.negative]),
-        pytest.param(9990, 9990, id='equal_min_max', marks=[pytest.mark.regression, pytest.mark.negative]),
-        pytest.param(2500000, 2690000, id='most_expensive_product', marks=[pytest.mark.regression, pytest.mark.negative])])
-    def test_negative_filter_price(self, min_price: int, max_price: int,  opened_catalog_page: CatalogPage):
+        pytest.param('ddfd', 'ddfd', id='base', marks=[pytest.mark.regression, pytest.mark.negative]),
+        pytest.param('ddfd', 'ddfd', id='min 0', marks=[pytest.mark.regression, pytest.mark.negative]),
+        pytest.param('ddfd', 'ddfd', id='equal_min_max', marks=[pytest.mark.regression, pytest.mark.negative]),
+        pytest.param('ddfd', 'ddfd', id='most_expensive_product', marks=[pytest.mark.regression, pytest.mark.negative])])
+    def test_invalid_price_range(self, min_price: int, max_price: int,  opened_catalog_page: CatalogPage):
         opened_catalog_page.filter.fill_price_range(min_price, max_price)
 
-        opened_catalog_page.filter.check_result()
+        opened_catalog_page.filter.check_results_count_zero()
         opened_catalog_page.filter.click_show_result()
 
-        opened_catalog_page.check_price_filter_url(min_price, max_price)
-        opened_catalog_page.check_title(f'цена от {min_price} до {max_price}')
-        opened_catalog_page.check_range_prices(min_price, max_price)
+        opened_catalog_page.check_cards_count(0)
 

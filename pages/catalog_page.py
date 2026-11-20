@@ -13,6 +13,7 @@ from pages.product_list_page import ProductListPage
 from tools.enums.category import Category
 from tools.enums.routes import Rout
 from tools.enums.sort_type import SortType
+from tools.function import check_equal
 
 
 class CatalogPage(ProductListPage):
@@ -122,6 +123,10 @@ class CatalogPage(ProductListPage):
     def check_price_filter_url(self, min_price: int, max_price: int):
         pattern = re.compile(rf".*from-{min_price}-to-{max_price}/apply.*")
         self.check_current_url_expected(pattern)
+
+    @allure.step('Проверка количества карточек товаров: {expected_count}')
+    def check_cards_count(self, expected_count: int):
+        check_equal(self.cards.count(), expected_count)
 
 
 
