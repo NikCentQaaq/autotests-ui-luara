@@ -1,4 +1,4 @@
-
+import re
 from random import randrange
 
 from playwright.sync_api import Page, expect
@@ -34,51 +34,52 @@ class SizeProductComponent(BaseComponent):
     @allure.step('Выбор рандомного размера из доступных')
     def select_random_size(self):
         # Загрузка элемента ЯндексСплит, который сбивает выбор размера
+
         if self.split.get_locator().is_visible(timeout=1000):
             self.split.check_visible()
 
-        count = self.size.count()
-        index = randrange(count)
-        size = self.size.nth(index)
-        selected_size = size.text_content().strip()
+        expect(self.size.first).to_be_visible()
 
-        with allure.step(f'Выбран размер {selected_size}'):
-            size.click(trial=True)
+        count = self.size.count()
+        size = self.size.nth(randrange(count))
+
+        selected_size = size.inner_text().strip()
+
+        with allure.step(f'Выбран размер "{selected_size}"'):
+
+            expect(size).to_be_visible()
+            expect(size).to_be_enabled()
+
             size.click()
 
+            expect(size).to_have_class(re.compile(r"\bactive\b"))
             expect(self.active_size).to_have_count(1)
-            expect(self.active_size).to_contain_text(selected_size)
+            expect(self.active_size).to_have_text(selected_size)
 
 
     @allure.step("Выбор размера при необходимости")
     def select_size_if_needed(self):
 
-        print("sizes:", self.size.count())
-        print("active:", self.active_size.count())
+        count = self.size.count()
 
-        # Размеров нет
-        if self.size.count() == 0:
+        if count == 0:
             return
 
-        # Уже есть выбранный размер
         if self.active_size.count() == 1:
-            with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
+            with allure.step(
+                    f'Размер "{self.get_selected_size()}" уже выбран'
+            ):
                 return
 
-        if self.size.count() == 1:
-            self.size.first.click()
-        else:
-            self.select_random_size()
+        if count == 1:
+            size = self.size.first
 
+            size.click()
 
-        # try:
-        #     expect(self.active_size).to_have_count(1, timeout=1000)
-        #
-        #     with allure.step(f'Размер уже выбран "{self.get_selected_size()}"'):
-        #         return
-        #
-        # except AssertionError:
-        #     pass
+            expect(size).to_have_class(re.compile(r"\bactive\b"))
+            expect(self.active_size).to_have_count(1)
 
-        # Размеров несколько, но ни один не выбран
+            return
+
+        self.select_random_size()
 
