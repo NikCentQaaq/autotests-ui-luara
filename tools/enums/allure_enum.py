@@ -15,6 +15,7 @@ class AllureFeature(StrEnum):
     CART = "Корзина"
     AUTHORIZATION = "Авторизация"
     PERSONAL_ACCOUNT = "Личный кабинет"
+    FILTER = "Фильтрация"
 
 
 
@@ -32,7 +33,7 @@ class AllureStory(StrEnum):
 
     OPEN_CATEGORY = "Открытие категории"
     SORT = "Сортировка каталога"
-    FILTER = "Фильтрация"
+    PRICE_FILTER = "Фильтрация"
 
     INVALID_LOGIN = "Вход с невалидными данными"
     LOGIN = "Вход"

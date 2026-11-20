@@ -4,6 +4,7 @@ from playwright.sync_api import Page, expect
 from components.headers.catalog_header_component import CatalogHeaderComponent
 from components.headers.header_component import HeaderComponent
 from components.product.product_size import SizeProductComponent
+from elements.button import Button
 from elements.image import Image
 from elements.link import Link
 from elements.text import Text

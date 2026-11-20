@@ -2,9 +2,11 @@ import allure
 import pytest
 
 from pages.catalog_page import CatalogPage
-from tools.enums.allure_enum import AllureStory
+from tools.enums.allure_enum import AllureStory, AllureEpic, AllureFeature
 
 
+@allure.epic(AllureEpic.UI)
+@allure.feature(AllureFeature.FILTER)
 class TestFilterCatalog:
 
 
@@ -13,11 +15,12 @@ class TestFilterCatalog:
 
 
 
-    @allure.story(AllureStory.FILTER)
+    @allure.story(AllureStory.PRICE_FILTER)
     @allure.title("Фильтрация по диапазону цен")
     @pytest.mark.parametrize("min_price, max_price", [
         pytest.param(10000, 50000, id='base', marks=pytest.mark.smoke),
         pytest.param(0, 60000, id='min 0', marks=pytest.mark.regression),
+
         pytest.param(9990, 9990, id='equal_min_max', marks=pytest.mark.regression),
         pytest.param(2500000, 2690000, id='most_expensive_product', marks=pytest.mark.regression)])
     def test_filter_price(self, min_price: int, max_price: int,  opened_catalog_page: CatalogPage):
@@ -32,18 +35,63 @@ class TestFilterCatalog:
 
 
 
-    @allure.story(AllureStory.FILTER)
-    @allure.title("Негативные сценарии. Фильтрация по диапазону цен")
+    @allure.story(AllureStory.PRICE_FILTER)
+    @allure.title("Фильтрация по диапазону цен без результатов")
+    @pytest.mark.regression
+    @pytest.mark.negative
     @pytest.mark.parametrize("min_price, max_price", [
-        pytest.param('ddfd', 'ddfd', id='base', marks=[pytest.mark.regression, pytest.mark.negative]),
-        pytest.param('ddfd', 'ddfd', id='min 0', marks=[pytest.mark.regression, pytest.mark.negative]),
-        pytest.param('ddfd', 'ddfd', id='equal_min_max', marks=[pytest.mark.regression, pytest.mark.negative]),
-        pytest.param('ddfd', 'ddfd', id='most_expensive_product', marks=[pytest.mark.regression, pytest.mark.negative])])
-    def test_invalid_price_range(self, min_price: int, max_price: int,  opened_catalog_page: CatalogPage):
+        pytest.param('2690001', '2690001', id='above_max_price'),
+        pytest.param('', '1899', id='less_min_prise'),
+        pytest.param('50991', '54899', id='dont_exist_prise'),
+        pytest.param('10000', '5000', id='min_is_greater_than_max')
+    ])
+    def test_filter_price_no_results(self, min_price: int, max_price: int,  opened_catalog_page: CatalogPage):
         opened_catalog_page.filter.fill_price_range(min_price, max_price)
 
         opened_catalog_page.filter.check_results_count_zero()
         opened_catalog_page.filter.click_show_result()
 
         opened_catalog_page.check_cards_count(0)
+
+
+    @allure.story(AllureStory.PRICE_FILTER)
+    @pytest.mark.regression
+    @pytest.mark.negative
+    @pytest.mark.xfail(reason='Известная проблема: отсутствует валидация нечислового ввода в поле "Цена от"')
+    @pytest.mark.parametrize("min_price", [
+        pytest.param('фыва', id='cyrillic'),
+        pytest.param('!!!!', id='special_chars'),
+        pytest.param('abc', id='latin'),
+        pytest.param('1фис345', id='mixed')
+    ])
+    def test_min_price_filter_invalid_input(self, min_price: int, opened_catalog_page: CatalogPage):
+        opened_catalog_page.filter.price.fill_min_price(min_price)
+        opened_catalog_page.filter.click_show_result()
+        opened_catalog_page.filter.price.check_min_price('')
+
+
+
+
+    @allure.story(AllureStory.PRICE_FILTER)
+    @pytest.mark.regression
+    @pytest.mark.negative
+    @pytest.mark.xfail(reason='Известная проблема: отсутствует валидация нечислового ввода в поле "Цена до"')
+    @pytest.mark.parametrize("max_price", [
+        pytest.param('фыва', id='cyrillic'),
+        pytest.param('!!!!', id='special_chars'),
+        pytest.param('abc', id='latin'),
+        pytest.param('1фис345', id='mixed')
+    ])
+    def test_max_price_filter_invalid_input(self, max_price: int, opened_catalog_page: CatalogPage):
+        opened_catalog_page.filter.price.fill_max_price(max_price)
+        opened_catalog_page.filter.click_show_result()
+        opened_catalog_page.filter.price.check_max_price('')
+
+
+
+
+
+
+
+
 
