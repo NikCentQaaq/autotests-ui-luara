@@ -20,7 +20,7 @@ class CardCatalogComponent(BaseComponent):
         self.image = Image(container.locator("div.img img"),"Изображение товара")
         self.articul = Text(container.locator("div.articul"), "Артикул")
 
-        self.price = Text(container.locator('div.price_quantity-new'), 'Цена')
+        self.price = Text(container.locator('div.price-new'), 'Цена')
         self.old_price = Text(container.locator('div.price_quantity-old'), 'Старая цена')
         self.sale = Text(container.locator('div.price_quantity-sale'), 'Скидка')
 

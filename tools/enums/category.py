@@ -14,3 +14,10 @@ class Category(StrEnum):
     BRACELET = "Браслет"
     PENDANT = "Подвес"  # ПодвесКА/Подвес
     BROOCH = "Брошь"
+
+
+
+class Metall(StrEnum):
+    GOLD = "Золото"
+    SILVER = "Серебро"
+    JEWELRY_ALLOY = "Ювелирный сплав"

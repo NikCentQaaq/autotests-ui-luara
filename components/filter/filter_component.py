@@ -1,6 +1,9 @@
+import allure
 from playwright.sync_api import Page
 
 from components.base_component import BaseComponent
+from components.filter.catalog_filter_component import CatalogFilterComponent
+from components.filter.metall_filter_component import MetalFilterComponent
 from components.filter.price_filter_component import PriceFilterComponent
 from components.filter.search_filter import SearchFilterComponent
 from elements.button import Button
@@ -13,6 +16,8 @@ class FilterComponent(BaseComponent):
 
         self.search = SearchFilterComponent(page)
         self.price = PriceFilterComponent(page)
+        self.category = CatalogFilterComponent(page)
+        self.metall = MetalFilterComponent(page)
 
 
         self.show_button = Button(page.get_by_role('button', name='Показать'), 'Показать')
@@ -25,11 +30,15 @@ class FilterComponent(BaseComponent):
 
 
 
+    @allure.step('Проверка компонентов фильтра')
+    def check_elements(self):
+        self.search.check_elements()
+        self.price.check_elements()
+        self.category.check_elements()
+        self.metall.check_elements()
 
-
-
-
-
+        self.show_button.check_visible()
+        self.reset_button.check_visible()
 
 
     def click_show(self):
@@ -37,4 +46,48 @@ class FilterComponent(BaseComponent):
 
     def click_reset(self):
         self.reset_button.click()
+
+    def click_show_result(self):
+        self.result_show.click()
+
+
+
+    @allure.step("Проверка блока найденных результатов")
+    def check_block_result(self):
+        self.result_show.check_visible()
+        self.result_count.check_visible()
+
+
+    @allure.step("Проверка количества найденных товаров")
+    def check_result_count(self):
+        self.check_block_result()
+        count = int(self.result_count.get_text())
+        assert count > 0, "Не найдено ни одного товара"
+
+    @allure.step("Проверка, что найденных товаров 0")
+    def check_results_count_zero(self):
+        self.check_block_result()
+        count = int(self.result_count.get_text())
+        assert count == 0, f'Найдено {count} товаров. Ожидалось: 0'
+
+
+
+
+    @allure.step('Установка диапазона цен {min_price} - {max_price}')
+    def fill_price_range(self, min_price, max_price):
+        self.price.fill_min_price(min_price)
+        self.price.fill_max_price(max_price)
+
+
+
+
+    def select_metall(self, metall):
+        self.metall.select(metall)
+
+    def select_category(self, category):
+        self.category.select(category)
+
+
+
+
 

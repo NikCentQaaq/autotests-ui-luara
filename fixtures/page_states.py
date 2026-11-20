@@ -25,11 +25,25 @@ def opened_main_page(main_page: MainPage):
 
 
 @pytest.fixture
+def opened_product(
+        request,
+        opened_catalog_page: CatalogPage,
+        product_page: ProductPage
+):
+    index = getattr(request, "param", 11)
+    opened_catalog_page.open_product_card_by_index(index)
+
+    product_page.check_loaded()
+    return product_page
+
+
+@pytest.fixture
 def cart_one_product(opened_product: ProductPage, cart_page: CartPage):
 
     opened_product.add_to_cart()
-    opened_product.check_num_cart_into_header(11)
+    opened_product.check_num_cart_into_header(1)
     opened_product.header.open_cart_page()
+
     cart_page.wait_items_loaded()
     cart_page.check_loaded()
 

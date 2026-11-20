@@ -1,3 +1,5 @@
+import re
+
 import allure
 from playwright.sync_api import Page
 
@@ -103,10 +105,23 @@ class CatalogPage(ProductListPage):
         assert prices == sorted(prices, reverse=True), f'Цены отсортированы неверно'
 
 
+    @allure.step('Проверка, что заголовок каталога содержит {expected}')
+    def check_title(self, expected: str):
+        self.title_category.check_contain_text(expected)
+
+    @allure.step('Проверка диапазона цен товара')
+    def check_range_prices(self, min_price: int, max_price: int):
+        prices = self.get_products_prices()
+
+        for price in prices:
+            assert min_price <= int(price) <= max_price,  f'Цена товара {price} не входит в диапазон от {min_price} до {max_price}'
 
 
 
-
+    @allure.step('Проверка URL фильтра цены от {min_price} до {max_price}')
+    def check_price_filter_url(self, min_price: int, max_price: int):
+        pattern = re.compile(rf".*from-{min_price}-to-{max_price}/apply.*")
+        self.check_current_url_expected(pattern)
 
 
 

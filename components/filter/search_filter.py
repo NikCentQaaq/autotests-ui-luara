@@ -16,17 +16,21 @@ class SearchFilterComponent(BaseComponent):
 
         self.empty_search = Text(page.get_by_text('В фильтрах ничего не найдено'), 'В фильтрах ничего не найдено')
 
+    @allure.step('Проверка видимости поиска фильтра')
+    def check_elements(self):
+        self.input.check_visible()
+
+
+
+
 
     @allure.step('Поиск фильтра "{value}"')
     def search(self, value: str):
         self.input.fill(value)
 
 
-
-
     def click_clear(self):
         self.clear_button.click()
-
 
 
     @allure.step('Проверка, что поиск по фильтрам не дал результатов')
