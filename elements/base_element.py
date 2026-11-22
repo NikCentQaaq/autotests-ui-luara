@@ -79,10 +79,11 @@ class BaseElement:
 
             expect(locator).to_contain_text(text)
 
-    def get_text(self) -> str:
+    def get_text(self, nth: int=0) -> str:
         step = f'Получение текста {self.type_of} "{self.name}"'
         with allure.step(step):
-            locator = self.get_locator()
+            locator = self.get_locator(nth)
+            expect(locator).to_be_visible()
             text = locator.inner_text().strip()
 
             logger.info(f'Получен текст "{text}"')

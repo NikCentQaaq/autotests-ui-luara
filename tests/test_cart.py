@@ -5,9 +5,6 @@ from pages.cart_page import CartPage
 from pages.product_page import ProductPage
 from tools.enums.allure_enum import AllureEpic, AllureFeature, AllureStory
 
-
-
-
 @allure.epic(AllureEpic.UI)
 @allure.feature(AllureFeature.CART)
 class TestCart:
@@ -37,19 +34,9 @@ class TestCart:
         opened_product.check_num_cart_into_header(1)
 
         opened_product.header.open_cart_page()
+        cart_page.check_loaded()
 
-        cart_page.check_current_url()
-        cart_page.check_elements()
-
-        cart_page.check_name_item(0, product["name"])
-        if product["size"]:
-            cart_page.check_size_item(0, product["size"])
-        cart_page.check_articul_item(0, product["articul"])
-        cart_page.check_total_quantity()
-
-        cart_page.check_total_price(product["price_quantity"])
-        cart_page.check_item_quantity(0, 1)
-
+        cart_page.check_added_product(product=product)
 
 
 
@@ -58,7 +45,6 @@ class TestCart:
     @pytest.mark.smoke
     @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_delete_product_from_cart(self, cart_one_product: CartPage):
-
         cart_one_product.delete_item(index=0)
 
         cart_one_product.check_cart_is_empty()

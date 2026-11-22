@@ -5,12 +5,13 @@ from components.headers.catalog_header_component import CatalogHeaderComponent
 from components.headers.header_component import HeaderComponent
 from components.product.product_size import SizeProductComponent
 from elements.button import Button
+from elements.container import Container
 from elements.image import Image
 from elements.link import Link
 from elements.text import Text
 from pages.base_page import BasePage
-from tools.enums.category import Category
-from tools.function import parse_int_price
+from tools.enums.category import Category, Metall
+from tools.function import parse_int_price, check_equal
 from tools.models.product_info import ProductInfo
 
 
@@ -32,6 +33,9 @@ class ProductPage(BasePage):
 
         self.articul = Text(page.get_by_text('Арт:'), 'Артикул')
 
+        self.characteristics_panel = Container(page.locator(".product-accordion__panel"),"Панель характеристик")
+        self.characteristic_button = Button(page.get_by_role('button', name='Характеристики'), 'Характеристики')
+        self.metall = Text(page.locator('div').filter(has=page.locator('dt'), has_text='Металл').locator('dd'), 'Металл')
 
 
 
@@ -66,7 +70,7 @@ class ProductPage(BasePage):
         return {
             "name": self.get_product_name(),
             "articul": self.get_product_articul(),
-            "price_quantity": self.get_product_price(),
+            "price": self.get_product_price(),
             "size": self.size.get_selected_size()
         }
 
@@ -116,6 +120,28 @@ class ProductPage(BasePage):
 
         self.add_button.check_visible()
         self.add_button.check_contain_text('Добавить в корзину')
+
+    @allure.step('Получение Металла товара')
+    def get_product_metall(self):
+        metall = self.metall.get_text().strip()
+        return metall
+
+
+    @allure.step("Раскрыть характеристики")
+    def open_characteristics_product(self):
+        self.characteristic_button.check_visible()
+        # клик если спрятаны
+        if self.characteristics_panel.get_locator().get_attribute("hidden") is not None:
+            self.characteristic_button.click()
+
+        self.metall.check_visible()
+
+    @allure.step('Проверка металла товара, ожидается {expected}')
+    def check_metall_product(self, expected : Metall):
+        self.open_characteristics_product()
+
+        metall = self.metall.get_text()
+        check_equal(metall, expected)
 
 
 

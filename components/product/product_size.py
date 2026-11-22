@@ -43,18 +43,7 @@ class SizeProductComponent(BaseComponent):
         count = self.size.count()
         size = self.size.nth(randrange(count))
 
-        selected_size = size.inner_text().strip()
-
-        with allure.step(f'Выбран размер "{selected_size}"'):
-
-            expect(size).to_be_visible()
-            expect(size).to_be_enabled()
-
-            size.click()
-
-            expect(size).to_have_class(re.compile(r"\bactive\b"))
-            expect(self.active_size).to_have_count(1)
-            expect(self.active_size).to_have_text(selected_size)
+        self.select_size(size)
 
 
 
@@ -70,22 +59,21 @@ class SizeProductComponent(BaseComponent):
                 return
 
         if count == 1:
-            size = self.size.first
-
-            expect(size).to_be_visible()
-            expect(size).to_be_enabled()
-
-            selected_size = size.inner_text().strip()
-
-            with allure.step(f'Выбран единственный размер "{selected_size}"'):
-                size.click()
-
-                expect(size).to_have_class(
-                    re.compile(r"\bactive\b")
-                )
-                expect(self.active_size).to_have_count(1)
-                expect(self.active_size).to_have_text(selected_size)
-
+            self.select_size(self.size.first)
             return
 
         self.select_random_size()
+
+
+    def select_size(self, size):
+        expect(size).to_be_visible()
+        expect(size).to_be_enabled()
+
+        selected_size = size.inner_text().strip()
+
+        with allure.step(f'Выбран размер "{selected_size}"'):
+            size.click()
+
+            expect(size).to_have_class(re.compile(r"\bactive\b"))
+            expect(self.active_size).to_have_count(1)
+            expect(self.active_size).to_have_text(selected_size)

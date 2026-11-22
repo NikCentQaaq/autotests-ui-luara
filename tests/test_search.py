@@ -22,8 +22,7 @@ class TestSearch:
 
         opened_main_page.header.search(value)
 
-        search_page.check_current_url()
-        search_page.check_elements()
+        search_page.check_loaded()
 
         search_page.check_search_results_by_articul(value)
 
@@ -40,8 +39,7 @@ class TestSearch:
     def test_search_by_name(self, value, value_product: str, opened_main_page: MainPage, search_page: SearchPage):
         opened_main_page.header.search(value)
 
-        search_page.check_current_url()
-        search_page.check_elements()
+        search_page.check_loaded()
 
         search_page.check_search_results_by_name(value_product)
 

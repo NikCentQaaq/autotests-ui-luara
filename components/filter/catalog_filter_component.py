@@ -20,7 +20,7 @@ class CatalogFilterComponent(BaseComponent):
 
 
     def checkbox(self, category: str):
-        return Checkbox(self.container.get_by_role("checkbox", name=category), category)
+        return Checkbox(self.container.locator(f'[data-value="{category}"] label').last, category)
 
     @allure.step('Выбрать категорию "{category}"')
     def select(self, category: str):

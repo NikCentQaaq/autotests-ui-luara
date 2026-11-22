@@ -67,7 +67,6 @@ class TestLogin:
         opened_personal_page.logout()
 
         main_page.check_loaded()
-        main_page.check_elements()
 
         main_page.header.check_login_visible()
 
@@ -79,7 +78,7 @@ class TestLogin:
         opened_personal_page.stay_after_click_logout()
 
         opened_personal_page.check_loaded()
-        opened_personal_page.check_elements()
+        # opened_personal_page.check_elements()
 
         opened_personal_page.header.check_personal_visible()
 

@@ -54,6 +54,20 @@ class BasePage:
             logger.info(step)
             expect(self.page).to_have_url(re.compile(f".*{self.ROUTE}.*"))
 
+
+
+    def check_current_url_contains(self, expected: str):
+        step = f"Проверка, что текущий URL содержит '{expected}'"
+
+        with allure.step(step):
+            logger.info(step)
+
+            assert expected in self.page.url, f"URL '{self.page.url}' не содержит '{expected}'"
+
+
+
+
+
     @staticmethod
     def check_element_text_by_name(element: BaseElement):
         step = f'Проверка {element.type_of} "{element.name}"'

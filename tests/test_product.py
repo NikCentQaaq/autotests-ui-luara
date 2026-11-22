@@ -41,23 +41,12 @@ class TestProduct:
     @allure.title("Открытие товара из выбранной категории")
     @pytest.mark.parametrize(
         "catalog_category, product_category",[
-            pytest.param(Category.RINGS,Category.RING,
-                id="rings",  marks=pytest.mark.smoke
-            ),
-            pytest.param( Category.EARRINGS,Category.EARRINGS,
-                id="earrings", marks=pytest.mark.regression
-            ),
-            pytest.param(Category.BRACELETS,Category.BRACELET,
-                id="bracelets", marks=pytest.mark.regression
-            ),
-            pytest.param(Category.NECKLACES,Category.NECKLACES,
-                id="necklaces", marks=pytest.mark.regression
-            ),
-            pytest.param(Category.PENDANTS,Category.PENDANT,
-                id="pendants", marks=pytest.mark.regression
-            ),
-        ],
-    )
+            pytest.param(Category.RINGS,Category.RING, id="rings",  marks=pytest.mark.smoke),
+            pytest.param( Category.EARRINGS,Category.EARRINGS,id="earrings", marks=pytest.mark.regression),
+            pytest.param(Category.BRACELETS,Category.BRACELET, id="bracelets", marks=pytest.mark.regression),
+            pytest.param(Category.NECKLACES,Category.NECKLACES, id="necklaces", marks=pytest.mark.regression),
+            pytest.param(Category.PENDANTS,Category.PENDANT,id="pendants", marks=pytest.mark.regression)
+        ])
     def test_open_product_from_category(
             self,
             opened_main_page: MainPage,
@@ -73,9 +62,6 @@ class TestProduct:
         product_page.check_current_url()
         product_page.check_elements()
         product_page.check_name_have_category(product_category)
-
-
-
 
 
 

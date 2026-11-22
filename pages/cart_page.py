@@ -169,6 +169,18 @@ class CartPage(BasePage):
 
 
 
+    @allure.step("Проверка добавленного товара в корзине")
+    def check_added_product(self,product: dict, quantity: int = 1,   index: int = 0):
+
+        self.check_name_item(index, product["name"])
+
+        if product["size"]:
+            self.check_size_item(index, product["size"])
+
+        self.check_articul_item(index, product["articul"])
+        self.check_item_quantity(index, quantity)
+        self.check_total_price(product["price"])
+        self.check_total_quantity()
 
 
 

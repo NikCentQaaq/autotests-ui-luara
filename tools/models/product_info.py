@@ -8,9 +8,5 @@ class ProductInfo(TypedDict):
     size: NotRequired[str]
 
 
-class ProductCartInfo(TypedDict):
-    name: str
-    articul: str
-    price: int
-    size: NotRequired[str]
+class ProductCartInfo(ProductInfo):
     quantity: int

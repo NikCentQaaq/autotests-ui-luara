@@ -128,7 +128,7 @@ class CatalogPage(ProductListPage):
         self.title_category.check_contain_text(expected)
 
     @allure.step('Проверка диапазона цен товара')
-    def check_range_prices(self, min_price: int, max_price: int):
+    def check_range_prices(self, min_price: int , max_price: int):
         prices = self.get_products_prices()
 
         for price in prices:
