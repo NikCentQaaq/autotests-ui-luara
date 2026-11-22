@@ -33,10 +33,10 @@ class ProductPage(BasePage):
 
         self.articul = Text(page.get_by_text('Арт:'), 'Артикул')
 
-        self.characteristics_panel = Container(page.locator(".product-accordion__panel"),"Панель характеристик")
-        self.characteristic_button = Button(page.get_by_role('button', name='Характеристики'), 'Характеристики')
-        self.metall = Text(page.locator('div').filter(has=page.locator('dt'), has_text='Металл').locator('dd'), 'Металл')
-
+        accordion = page.locator(".product-accordion__item").filter( has=page.get_by_role("button", name="Характеристики"))
+        self.characteristic_button = Button(accordion.get_by_role("button", name="Характеристики"), "Характеристики")
+        self.characteristics_panel = Container(accordion.locator(".product-accordion__panel"), "Панель характеристик")
+        self.metall = Text(accordion.locator("div").filter(has=page.locator("dt:text-is('Металл')")).locator("dd"),"Металл")
 
 
     @allure.step("Проверка уведомления об успешном добавлении товара")
@@ -128,11 +128,21 @@ class ProductPage(BasePage):
 
 
     @allure.step("Раскрыть характеристики")
+    @allure.step("Раскрыть характеристики")
     def open_characteristics_product(self):
-        self.characteristic_button.check_visible()
-        # клик если спрятаны
-        if self.characteristics_panel.get_locator().get_attribute("hidden") is not None:
-            self.characteristic_button.click()
+# Флакает именно на CI
+        button = self.characteristic_button.get_locator()
+        panel = self.characteristics_panel.get_locator()
+
+        button.scroll_into_view_if_needed()
+
+        expect(button).to_be_visible()
+        expect(button).to_be_enabled()
+
+        if not panel.is_visible():
+            button.click()
+
+            expect(panel).to_be_visible(timeout=10000)
 
         self.metall.check_visible()
 

@@ -22,7 +22,6 @@ class TestCart:
         ],
         indirect=True
     )
-    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_add_1_product_to_cart(self, opened_product: ProductPage, cart_page: CartPage):
         opened_product.size.select_size_if_needed()
 
@@ -43,7 +42,6 @@ class TestCart:
     @allure.story(AllureStory.DELETE_PRODUCT)
     @allure.title('Удаление товара из корзины')
     @pytest.mark.smoke
-    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_delete_product_from_cart(self, cart_one_product: CartPage):
         cart_one_product.delete_item(index=0)
 
@@ -55,7 +53,6 @@ class TestCart:
     @allure.story(AllureStory.CHANGE_QUANTITY)
     @allure.title("Увеличение количества товара в корзине")
     @pytest.mark.regression
-    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_plus_product_quantity(self, cart_one_product: CartPage):
 
         old_quantity = cart_one_product.get_item_quantity(0)
@@ -72,7 +69,6 @@ class TestCart:
     @allure.story(AllureStory.CHANGE_QUANTITY)
     @allure.title("Уменьшение количества товара в корзине")
     @pytest.mark.regression
-    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_minus_product_quantity(self, cart_two_quantity: CartPage):
 
         old_quantity = cart_two_quantity.get_item_quantity(0)
@@ -89,7 +85,6 @@ class TestCart:
     @allure.story(AllureStory.CART_PRICE)
     @allure.title("Пересчет итоговой стоимости корзины после увеличения количества товара на 1")
     @pytest.mark.regression
-    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_cart_price_after_plus_1_quantity(self, cart_one_product: CartPage):
 
         product= cart_one_product.get_product_info(index=0)
@@ -106,7 +101,6 @@ class TestCart:
     @allure.story(AllureStory.CART_PRICE)
     @allure.title("Пересчет итоговой стоимости корзины после уменьшения количества товара на 1")
     @pytest.mark.regression
-    @pytest.mark.flaky(reruns=2, reruns_delay=1)
     def test_cart_price_after_minus_1_quantity(self, cart_two_quantity: CartPage):
 
         product= cart_two_quantity.get_product_info(index=0)
