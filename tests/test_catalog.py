@@ -18,12 +18,12 @@ class TestCatalog:
     @pytest.mark.smoke
     @pytest.mark.regression
     @pytest.mark.parametrize(
-        "catalog_category, product_category",
-        [pytest.param(Category.RINGS,Category.RING,id="rings"),
-        pytest.param(Category.EARRINGS,Category.EARRINGS,id="earrings"),
-        pytest.param(Category.BRACELETS,Category.BRACELET, id="bracelets"),
-        pytest.param(Category.NECKLACES,    Category.NECKLACES, id="necklaces"),
-        pytest.param( Category.PENDANTS,Category.PENDANT,id="pendants")
+        "catalog_category",
+        [pytest.param(Category.RINGS,id="rings"),
+        pytest.param(Category.EARRINGS,id="earrings"),
+        pytest.param(Category.BRACELETS, id="bracelets"),
+        pytest.param(Category.NECKLACES, id="necklaces"),
+        pytest.param( Category.PENDANTS, id="pendants")
         ]
     )
     def test_open_category_from_concern_catalog(
@@ -31,7 +31,6 @@ class TestCatalog:
             opened_main_page: MainPage,
             catalog_page: CatalogPage,
             catalog_category: Category,
-            product_category: Category
     ):
         opened_main_page.open_category(catalog_category)
 
@@ -39,7 +38,7 @@ class TestCatalog:
         catalog_page.check_elements_filter_products()
 
         catalog_page.check_selected_filter(catalog_category)
-        catalog_page.check_products_category(product_category)
+        catalog_page.check_products_category(catalog_category.text_name)
 
 
 

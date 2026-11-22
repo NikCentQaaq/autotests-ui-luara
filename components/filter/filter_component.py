@@ -8,6 +8,7 @@ from components.filter.price_filter_component import PriceFilterComponent
 from components.filter.search_filter import SearchFilterComponent
 from elements.button import Button
 from elements.text import Text
+from tools.enums.category import Metall, Category
 
 
 class FilterComponent(BaseComponent):
@@ -86,6 +87,19 @@ class FilterComponent(BaseComponent):
 
     def select_category(self, category):
         self.category.select(category)
+
+    @allure.step("Проверка, что ни один металл не выбран")
+    def check_metall_not_selected(self):
+         for metall in Metall:
+             self.metall.check_not_selected(metall)
+
+    @allure.step("Проверка, что ни одна категория не выбрана")
+    def check_category_not_selected(self):
+        for category in Category:
+            self.category.check_not_selected(category)
+
+
+
 
 
 

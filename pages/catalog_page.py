@@ -8,6 +8,7 @@ from components.catalog.filter_catalog.catalog_filter_component import CatalogSe
 from components.filter.filter_component import FilterComponent
 from components.headers.catalog_header_component import CatalogHeaderComponent
 from components.headers.header_component import HeaderComponent
+from elements.button import Button
 from elements.text import Text
 from pages.product_list_page import ProductListPage
 from tools.enums.category import Category
@@ -29,6 +30,11 @@ class CatalogPage(ProductListPage):
 
         self.title_category = Text(page.locator('div.h1_b_cat h1'), 'Заголовок Категории')
         self.catalog_selected_filter = CatalogSelectedFilterComponent(page)
+
+        self.reset_all_filter_button = Button(page.get_by_role('link', name='Сбросить всё'), 'Сбросить всё')
+
+
+
 
 
     @allure.step('Проверка загрузки Страницы Каталога')
@@ -146,5 +152,27 @@ class CatalogPage(ProductListPage):
         check_equal(self.cards.count(), expected_count)
 
 
+    @allure.step('Сбросить фильтры')
+    def reset_filter_from_block_filter(self):
+        self.filter.click_reset()
+
+    @allure.step('Сброс всех фильтров')
+    def reset_all_filter(self):
+        self.click_reset_all()
+
+    @allure.step('Нажатие кнопки "Сбросить все"')
+    def click_reset_all(self):
+        self.reset_all_filter_button.click()
+
+
+    @allure.step('Проверка, что фильтры не выбраны')
+    def check_filters_reset(self):
+        self.filter.price.check_min_price("")
+        self.filter.price.check_max_price("")
+
+        self.filter.check_metall_not_selected()
+        self.filter.check_category_not_selected()
+
+        self.reset_all_filter_button.check_not_visible()
 
 

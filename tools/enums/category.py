@@ -11,11 +11,19 @@ class Category(StrEnum):
     BROOCHES = "Броши"
     CUFFLINKS = "Запонки"
 
-    RING = "Кольцо"
-    BRACELET = "Браслет"
-    PENDANT = "Подвес"  # ПодвесКА/Подвес
-    BROOCH = "Брошь"
 
+    @property
+    @property
+    def text_name(self) -> str:
+        return {
+            Category.RINGS: "Кольцо",
+            Category.EARRINGS: "Серьги",
+            Category.BRACELETS: "Браслет",
+            Category.NECKLACES: "Колье",
+            Category.PENDANTS: "Подвес",
+            Category.BROOCHES: "Брошь",
+            Category.CUFFLINKS: "Запонки",
+        }[self]
 
     @property
     def url_pattern(self):
@@ -27,7 +35,7 @@ class Category(StrEnum):
             Category.PENDANTS: re.compile(r".*/catalog/pendants/?$"),
             Category.BROOCHES: re.compile(r".*/catalog/brooches/?$"),
             Category.CUFFLINKS: re.compile(r".*/catalog/studs/?$"),
-        }[self]
+        }.get(self, self.value)
 
     @property
     def url_contains(self) -> str:
@@ -47,6 +55,15 @@ class Metall(StrEnum):
     GOLD = "Золото"
     SILVER = "Серебро"
     JEWELRY_ALLOY = "Ювелирный сплав"
+
+
+    @property
+    def text_name(self) -> str:
+        return {
+            Metall.GOLD: "золот",
+            Metall.SILVER: "серебр",
+            Metall.JEWELRY_ALLOY: ""
+        }[self]
 
     @property
     def url_pattern(self):

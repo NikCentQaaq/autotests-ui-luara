@@ -10,6 +10,7 @@ from elements.text import Text
 from pages.base_page import BasePage
 from tools.enums.routes import Rout
 from tools.function import check_equal
+from tools.models.product_info import ProductInfo
 
 
 class CartPage(BasePage):
@@ -182,7 +183,32 @@ class CartPage(BasePage):
         self.check_total_price(product["price"])
         self.check_total_quantity()
 
+    @allure.step('Проверка количества карточек товаров: {expected}')
+    def check_count_items(self, expected: int):
+        actual = self.items.count()
+        check_equal(actual, expected)
 
 
+    @allure.step('Проверка товара в корзине по Артикулу')
+    def check_added_product_by_articul(self, product: ProductInfo):
+        item_locator = self.items.filter(has_text=product["articul"])
+        # ПОИСК В КОРЗИНЕ ПО АРТИКУЛУ
+        expect(item_locator).to_have_count(1)
+
+        item = CartItemComponent(self.page, item_locator.first)
+
+        item.check_name(product["name"])
+        item.check_articul(product["articul"])
+        item.check_price(product["price"])
+
+        if product["size"]:
+            item.check_size(product["size"])
+
+    @allure.step("Проверка товаров в корзине")
+    def check_products(self, expected_products: list[ProductInfo]):
+        self.check_count_items(len(expected_products))
+
+        for product in expected_products:
+            self.check_added_product_by_articul(product)
 
 

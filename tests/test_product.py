@@ -23,8 +23,7 @@ class TestProduct:
 
         opened_catalog_page.open_product_card_by_index(index)
 
-        product_page.check_current_url()
-        product_page.check_elements()
+        product_page.check_loaded()
 
 
     @allure.title("Открытие карточки товара из результатов Поиска")
@@ -32,20 +31,19 @@ class TestProduct:
     def test_open_product_from_search(self, search_results_page: SearchPage, product_page: ProductPage):
         search_results_page.open_product_card_by_index(0)
 
-        product_page.check_current_url()
-        product_page.check_elements()
+        product_page.check_loaded()
 
 
 
 
     @allure.title("Открытие товара из выбранной категории")
     @pytest.mark.parametrize(
-        "catalog_category, product_category",[
-            pytest.param(Category.RINGS,Category.RING, id="rings",  marks=pytest.mark.smoke),
-            pytest.param( Category.EARRINGS,Category.EARRINGS,id="earrings", marks=pytest.mark.regression),
-            pytest.param(Category.BRACELETS,Category.BRACELET, id="bracelets", marks=pytest.mark.regression),
-            pytest.param(Category.NECKLACES,Category.NECKLACES, id="necklaces", marks=pytest.mark.regression),
-            pytest.param(Category.PENDANTS,Category.PENDANT,id="pendants", marks=pytest.mark.regression)
+        "catalog_category",[
+            pytest.param(Category.RINGS, id="rings",  marks=pytest.mark.smoke),
+            pytest.param( Category.EARRINGS, id="earrings", marks=pytest.mark.regression),
+            pytest.param(Category.BRACELETS, id="bracelets", marks=pytest.mark.regression),
+            pytest.param(Category.NECKLACES, id="necklaces", marks=pytest.mark.regression),
+            pytest.param(Category.PENDANTS, id="pendants", marks=pytest.mark.regression)
         ])
     def test_open_product_from_category(
             self,
@@ -53,15 +51,13 @@ class TestProduct:
             catalog_page: CatalogPage,
             product_page: ProductPage,
             catalog_category: Category,
-            product_category: Category
     ):
         opened_main_page.open_category(catalog_category)
 
         catalog_page.open_product_card_random()
 
-        product_page.check_current_url()
-        product_page.check_elements()
-        product_page.check_name_have_category(product_category)
+        product_page.check_loaded()
+        product_page.check_name_have_category(catalog_category.text_name)
 
 
 

@@ -51,3 +51,5 @@ class MetalFilterComponent(BaseComponent):
         self.checkbox(metal).check_not_checked()
 
 
+
+

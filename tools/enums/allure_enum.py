@@ -35,6 +35,7 @@ class AllureStory(StrEnum):
     SORT = "Сортировка каталога"
     PRICE_FILTER = "Фильтрация Цены"
     METALL_FILTER = 'Фильтрация Металла'
+    FILTER = "Фильтрация"
 
 
     INVALID_LOGIN = "Вход с невалидными данными"

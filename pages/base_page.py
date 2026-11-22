@@ -90,3 +90,7 @@ class BasePage:
         self.check_current_url()
         self.check_elements()
 
+    @allure.step('Переход назад')
+    def go_back(self):
+        self.page.go_back()
+

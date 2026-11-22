@@ -96,6 +96,17 @@ class BaseElement:
 
 
 
+    def check_not_visible(self, nth: int=0):
+        step = f'Проверка, что {self.type_of} "{self.name}" Не виден'
+
+        with allure.step(step):
+            locator = self.get_locator(nth)
+            logger.info(step)
+
+            expect(locator).not_to_be_visible()
+
+
+
 
 
 

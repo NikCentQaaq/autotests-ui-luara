@@ -11,6 +11,67 @@ from tools.enums.category import Metall, Category
 @allure.feature(AllureFeature.FILTER)
 class TestFilterCatalog:
 
+    @allure.story(AllureStory.FILTER)
+    @allure.title("Сброс выбранных фильтров")
+    @pytest.mark.smoke
+    def test_reset_selected_filters(self, opened_catalog_page: CatalogPage):
+
+        opened_catalog_page.filter.select_metall(Metall.GOLD)
+        opened_catalog_page.filter.select_category(Category.RINGS)
+        opened_catalog_page.filter.fill_price_range(60000, 150000)
+        opened_catalog_page.filter.click_show_result()
+
+        opened_catalog_page.reset_all_filter()
+
+        opened_catalog_page.check_current_url()
+        opened_catalog_page.check_filters_reset()
+
+
+
+    @allure.story(AllureStory.FILTER)
+    @allure.title("Сохранение выбранных фильтров после обновления страницы")
+    @pytest.mark.smoke
+    @pytest.mark.parametrize("metall, category, min_price, max_price", [
+        pytest.param(Metall.SILVER, Category.BRACELETS, 10000, 30000, id='silver_bracelets')
+    ])
+    def test_selected_filters_saved_after_refresh(
+            self,
+            metall: Metall,
+            category: Category,
+            min_price: int,
+            max_price: int,
+            opened_catalog_page: CatalogPage
+    ):
+        opened_catalog_page.filter.select_metall(metall)
+        opened_catalog_page.filter.select_category(category)
+        opened_catalog_page.filter.fill_price_range(min_price, max_price)
+        opened_catalog_page.filter.click_show_result()
+
+        opened_catalog_page.reload()
+
+        opened_catalog_page.filter.metall.check_selected(metall)
+        opened_catalog_page.filter.category.check_selected(category)
+        opened_catalog_page.filter.price.check_min_price(min_price)
+        opened_catalog_page.filter.price.check_max_price(max_price)
+
+        opened_catalog_page.check_current_url_contains(metall.url_contains)
+        opened_catalog_page.check_current_url_contains(category.url_contains)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @allure.story(AllureStory.PRICE_FILTER)
     @allure.title("Фильтрация по диапазону цен")
@@ -129,19 +190,19 @@ class TestFilterCatalog:
 
     @allure.story(AllureStory.METALL_FILTER)
     @allure.title("Фильтрация по категории изделий")
-    @pytest.mark.parametrize("category, text_value", [
-        pytest.param(Category.RINGS, Category.RING, id='rings', marks=pytest.mark.smoke),
-        pytest.param(Category.BROOCHES, Category.BROOCH, id='earrings', marks=pytest.mark.regression),
-        pytest.param(Category.BRACELETS, Category.BRACELET, id='bracelets', marks=pytest.mark.regression),
-        pytest.param(Category.NECKLACES, Category.NECKLACES, id='necklaces', marks=pytest.mark.regression),
-        pytest.param(Category.CUFFLINKS, Category.CUFFLINKS, id='pedants', marks=pytest.mark.regression)
+    @pytest.mark.parametrize("category", [
+        pytest.param(Category.RINGS,  id='rings', marks=pytest.mark.smoke),
+        pytest.param(Category.BROOCHES, id='earrings', marks=pytest.mark.regression),
+        pytest.param(Category.BRACELETS, id='bracelets', marks=pytest.mark.regression),
+        pytest.param(Category.NECKLACES, id='necklaces', marks=pytest.mark.regression),
+        pytest.param(Category.CUFFLINKS,  id='pedants', marks=pytest.mark.regression)
     ])
-    def test_select_category(self, category,text_value,  opened_catalog_page: CatalogPage):
+    def test_select_category(self, category,  opened_catalog_page: CatalogPage):
         opened_catalog_page.filter.select_category(category)
         opened_catalog_page.filter.click_show_result()
 
         opened_catalog_page.check_current_url_expected(category.url_pattern)
-        opened_catalog_page.check_names_contain_text(text_value)
+        opened_catalog_page.check_names_contain_text(category.text_name)
 
 
 
@@ -149,9 +210,9 @@ class TestFilterCatalog:
 
 
     @pytest.mark.regression
-    @pytest.mark.parametrize("category, category_text", [
-        pytest.param(Category.RINGS, Category.RING, id='rings'),
-        pytest.param(Category.BRACELETS, Category.BRACELET, id='bracelets')])
+    @pytest.mark.parametrize("category", [
+        pytest.param(Category.RINGS, id='rings'),
+        pytest.param(Category.BRACELETS, id='bracelets')])
     @pytest.mark.parametrize("metall, metall_text", [
         pytest.param(Metall.SILVER, 'серебр', id='silver'),
         pytest.param(Metall.GOLD, 'золот', id='gold')])

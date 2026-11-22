@@ -31,8 +31,7 @@ class TestHeaderNavigation:
     def test_open_main_page_from_header_logo(self, opened_catalog_page: CatalogPage, main_page: MainPage):
         opened_catalog_page.header.open_main_page()
 
-        main_page.check_current_url()
-        main_page.check_elements()
+        main_page.check_loaded()
 
 
 
@@ -53,8 +52,7 @@ class TestHeaderNavigation:
     def test_open_login_page(self, opened_main_page: MainPage, login_page: LoginPage):
         opened_main_page.header.open_login_page()
 
-        login_page.check_current_url()
-        login_page.check_elements()
+        login_page.check_loaded()
 
 
 
@@ -64,8 +62,7 @@ class TestHeaderNavigation:
     def test_open_aktsii_page(self, opened_main_page: MainPage, aktsii_page: AktsiiPage):
         opened_main_page.header.open_aktsii_page()
 
-        aktsii_page.check_current_url()
-        aktsii_page.check_elements()
+        aktsii_page.check_loaded()
 
 
 
@@ -75,8 +72,7 @@ class TestHeaderNavigation:
     def test_open_magazines_page(self, opened_main_page: MainPage, magazines_page: MagazinesPage):
         opened_main_page.header.open_magazines_page()
 
-        magazines_page.check_current_url()
-        magazines_page.check_elements()
+        magazines_page.check_loaded()
 
 
 
