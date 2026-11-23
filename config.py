@@ -1,5 +1,5 @@
 from enum import StrEnum
-from typing import Self, Any
+from typing import Self
 
 from pydantic import HttpUrl, DirectoryPath, FilePath, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -14,8 +14,6 @@ class Browser(StrEnum):
 class UserData(BaseModel):
     login: str
     password: str
-
-
 
 
 class Settings(BaseSettings):

@@ -1,7 +1,7 @@
 import allure
-from playwright.sync_api import Page, Locator, expect
-
+from playwright.sync_api import  Locator, expect
 from tools.logger import get_logger
+
 
 logger = get_logger('BASE_ELEMENT')
 
@@ -16,6 +16,7 @@ class BaseElement:
         return self.__class__.__name__
 
 
+
     def get_locator(self, nth: int = 0) -> Locator:
         """
         Возвращает Locator с указанным индексом.
@@ -26,9 +27,6 @@ class BaseElement:
         with allure.step(step):
             logger.info(step)
             return self.locator.nth(nth)
-
-
-
 
 
 

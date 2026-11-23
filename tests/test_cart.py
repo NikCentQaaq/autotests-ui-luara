@@ -24,19 +24,15 @@ class TestCart:
         indirect=True
     )
     def test_add_1_product_to_cart(self, opened_product: ProductPage, cart_page: CartPage):
-        opened_product.size.select_size_if_needed()
 
-        product = opened_product.get_product_info()
+        product = opened_product.add_product_to_cart()
 
-        opened_product.click_add_button()
-
-        opened_product.check_popup_success_add()
         opened_product.check_num_cart_into_header(1)
 
         opened_product.header.open_cart_page()
         cart_page.check_loaded()
 
-        cart_page.check_added_product(product=product)
+        cart_page.check_added_product(product)
 
     @allure.story(AllureStory.ADD_TO_CART)
     @allure.title("Добавление двух товаров в корзину")
@@ -44,26 +40,17 @@ class TestCart:
     def test_add_2_product_to_cart(self, opened_catalog_page: CatalogPage, product_page: ProductPage, cart_page: CartPage):
 
         opened_catalog_page.open_product_card_by_index(index=5)
-
         product_page.check_loaded()
-        product_page.size.select_size_if_needed()
-        product1 = product_page.get_product_info()
 
-        product_page.click_add_button()
-        product_page.check_popup_success_add()
+        product1 = product_page.add_product_to_cart()
 
         product_page.go_back()
         opened_catalog_page.check_loaded()
 
         opened_catalog_page.open_product_card_by_index(index=6)
-
         product_page.check_loaded()
-        product_page.size.select_size_if_needed()
-        product2 = product_page.get_product_info()
 
-        product_page.check_loaded()
-        product_page.click_add_button()
-        product_page.check_popup_success_add()
+        product2 = product_page.add_product_to_cart()
 
         product_page.header.check_quantity(2)
         product_page.header.open_cart_page()

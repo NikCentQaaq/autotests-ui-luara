@@ -40,11 +40,11 @@ def opened_product(
 @pytest.fixture
 def cart_one_product(opened_product: ProductPage, cart_page: CartPage):
 
-    opened_product.add_to_cart()
-    opened_product.check_num_cart_into_header(1)
+    opened_product.add_product_to_cart()
+
+    opened_product.header.check_quantity(1)
     opened_product.header.open_cart_page()
 
-    cart_page.wait_items_loaded()
     cart_page.check_loaded()
 
     return cart_page
@@ -79,7 +79,7 @@ def search_results_page(request,
 
 
 @pytest.fixture
-def opened_login_page(opened_main_page: MainPage, login_page: LoginPage):
+def opened_login_page(login_page: LoginPage):
     login_page.open()
     login_page.check_loaded()
     return login_page
@@ -96,21 +96,14 @@ def opened_personal_page(opened_login_page: LoginPage, personal_page: PersonalPa
 @pytest.fixture
 def cart_two_product(opened_product: ProductPage, opened_catalog_page: CatalogPage, cart_page: CartPage):
 
-    opened_product.size.select_size_if_needed()
-    product1 = opened_product.get_product_info()
+    product1 = opened_product.add_product_to_cart()
 
-    opened_product.add_to_cart()
-
-    opened_product.go_back()
-    opened_catalog_page.check_loaded()
+    opened_product.back_to_catalog_page()
 
     opened_catalog_page.open_product_card_by_index(index=5)
-
     opened_product.check_loaded()
-    opened_product.size.select_size_if_needed()
-    product2 = opened_product.get_product_info()
 
-    opened_product.add_to_cart()
+    product2 = opened_product.add_product_to_cart()
 
     opened_product.header.check_quantity(2)
     opened_product.header.open_cart_page()

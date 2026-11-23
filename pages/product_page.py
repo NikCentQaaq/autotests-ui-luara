@@ -153,6 +153,23 @@ class ProductPage(BasePage):
         metall = self.metall.get_text()
         check_equal(metall, expected)
 
+    @allure.step("Добавление текущего товара в корзину")
+    def add_product_to_cart(self) -> ProductInfo:
+
+        self.size.select_size_if_needed()
+
+        product = self.get_product_info()
+
+        self.add_to_cart()
+
+        return product
+
+    @allure.step('Возвращение назад на страницу каталога')
+    def back_to_catalog_page(self):
+        self.go_back()
+        self.check_loaded()
+
+
 
 
 

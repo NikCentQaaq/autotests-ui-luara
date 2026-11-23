@@ -9,14 +9,14 @@ logger = get_logger('BUTTON')
 
 class Button(BaseElement):
 
-    def check_enabled(self, nth: int=0):
+    def check_enabled(self, nth: int=0, timeout: float | None = None):
         step = f'Проверка, что {self.type_of} "{self.name}" активен'
 
         with allure.step(step):
             locator = self.get_locator(nth)
             logger.info(step)
 
-            expect(locator).to_be_enabled()
+            expect(locator).to_be_enabled(timeout=timeout)
 
 
     def check_disabled(self, nth: int=0):

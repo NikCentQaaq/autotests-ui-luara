@@ -24,11 +24,11 @@ class BasePage:
         full_url = f"{settings.get_base_url()}{self.ROUTE}"
         step = f'Открытие URL "{full_url}"'
 
-        CookieComponent(self.page).accept_if_visible()
-
         with allure.step(step):
             logger.info(step)
             self.page.goto(full_url, wait_until="load")
+
+            CookieComponent(self.page).accept_if_visible()
 
 
     def reload(self):
@@ -48,7 +48,7 @@ class BasePage:
             expect(self.page).to_have_url(expected_url)
 
     def check_current_url(self):
-        step = f'Проверка соответствует ли текущий URL шаблону {self.ROUTE}'
+        step = f'Проверка соответствует ли текущий URL {self.ROUTE}'
 
         with allure.step(step):
             logger.info(step)
@@ -82,15 +82,28 @@ class BasePage:
             element.check_visible()
             element.check_have_text(text)
 
+
+
+
     def check_elements(self):
+        """
+        Проверка всех обязательных элементов страницы.
+        Переопределяется в наследниках.
+        """
         pass
+
 
     @allure.step('Проверка загрузки страницы')
     def check_loaded(self):
         self.check_current_url()
         self.check_elements()
 
-    @allure.step('Переход назад')
+
+
     def go_back(self):
-        self.page.go_back()
+        step = "Переход назад"
+
+        with allure.step(step):
+            logger.info(step)
+            self.page.go_back()
 
