@@ -67,7 +67,7 @@ class CatalogPage(ProductListPage):
         self.check_cards_visible()
 
 
-
+    #
 
     @allure.step('Проверка выбранной категории "{category_name}"')
     def check_selected_filter(self, category_name: Category):
