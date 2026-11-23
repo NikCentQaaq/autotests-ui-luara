@@ -12,7 +12,7 @@ class Category(StrEnum):
     CUFFLINKS = "Запонки"
 
 
-    @property
+
     @property
     def text_name(self) -> str:
         return {
@@ -35,7 +35,7 @@ class Category(StrEnum):
             Category.PENDANTS: re.compile(r".*/catalog/pendants/?$"),
             Category.BROOCHES: re.compile(r".*/catalog/brooches/?$"),
             Category.CUFFLINKS: re.compile(r".*/catalog/studs/?$"),
-        }.get(self, self.value)
+        }[self]
 
     @property
     def url_contains(self) -> str:

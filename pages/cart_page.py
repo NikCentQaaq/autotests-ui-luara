@@ -191,11 +191,7 @@ class CartPage(BasePage):
 
     @allure.step('Проверка товара в корзине по Артикулу')
     def check_added_product_by_articul(self, product: ProductInfo):
-        item_locator = self.items.filter(has_text=product["articul"])
-        # ПОИСК В КОРЗИНЕ ПО АРТИКУЛУ
-        expect(item_locator).to_have_count(1)
-
-        item = CartItemComponent(self.page, item_locator.first)
+        item = self.get_item_by_articul(product["articul"])
 
         item.check_name(product["name"])
         item.check_articul(product["articul"])
@@ -204,11 +200,61 @@ class CartPage(BasePage):
         if product["size"]:
             item.check_size(product["size"])
 
-    @allure.step("Проверка товаров в корзине")
+    @allure.step('Проверка товаров в корзине')
     def check_products(self, expected_products: list[ProductInfo]):
         self.check_count_items(len(expected_products))
 
         for product in expected_products:
             self.check_added_product_by_articul(product)
 
-# git
+    @allure.step('Получение товара по артикулу')
+    def get_item_by_articul(self, articul: str) -> CartItemComponent:
+        locator = self.items.filter(has_text=articul)
+
+        expect(locator).to_have_count(1)
+
+        return CartItemComponent(self.page, locator.first)
+
+
+    @allure.step('Удаление товара "{articul}"')
+    def delete_item_by_articul(self, articul: str):
+
+        self.get_item_by_articul(articul).delete()
+
+    @allure.step('Увеличение кол-ва товара "{articul}"')
+    def plus_quantity_by_articul(self, articul: str, quantity: int = 1):
+        old_price = self.summary.total_price.get_text()
+
+        self.get_item_by_articul(articul).plus_quantity(quantity)
+
+        expect(self.summary.total_price.locator).not_to_have_text(old_price)
+
+
+    @allure.step('Уменьшение кол-ва товара "{articul}"')
+    def minus_quantity_by_articul(self, articul: str, quantity: int = 1):
+        old_price = self.summary.total_price.get_text()
+
+        self.get_item_by_articul(articul).minus_quantity(quantity)
+
+        expect(self.summary.total_price.locator).not_to_have_text(old_price)
+
+
+
+    @allure.step('Проверка кол-ва товара {quantity} по артикулу {articul}')
+    def check_quantity_by_articul(self, articul: str, quantity: int):
+        item = self.get_item_by_articul(articul)
+        item.check_quantity(quantity)
+
+
+
+
+    @allure.step('Проверка общей стоимости нескольких товаров')
+    def check_total_price_products(self, products: list[ProductInfo]):
+        expected = self.get_sum_price_products(products)
+        self.check_total_price(expected)
+
+
+    @allure.step('Получение суммы стоимости всех товаров')
+    def get_sum_price_products(self, products: list[ProductInfo]):
+        price = sum(product["price"] for product in products)
+        return price

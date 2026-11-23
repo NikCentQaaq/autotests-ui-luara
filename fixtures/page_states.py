@@ -30,7 +30,7 @@ def opened_product(
         opened_catalog_page: CatalogPage,
         product_page: ProductPage
 ):
-    index = getattr(request, "param", 12)
+    index = getattr(request, "param", 11)
     opened_catalog_page.open_product_card_by_index(index)
 
     product_page.check_loaded()
@@ -91,6 +91,36 @@ def opened_personal_page(opened_login_page: LoginPage, personal_page: PersonalPa
 
     personal_page.check_loaded()
     return personal_page
+
+
+@pytest.fixture
+def cart_two_product(opened_product: ProductPage, opened_catalog_page: CatalogPage, cart_page: CartPage):
+
+    opened_product.size.select_size_if_needed()
+    product1 = opened_product.get_product_info()
+
+    opened_product.add_to_cart()
+
+    opened_product.go_back()
+    opened_catalog_page.check_loaded()
+
+    opened_catalog_page.open_product_card_by_index(index=5)
+
+    opened_product.check_loaded()
+    opened_product.size.select_size_if_needed()
+    product2 = opened_product.get_product_info()
+
+    opened_product.add_to_cart()
+
+    opened_product.header.check_quantity(2)
+    opened_product.header.open_cart_page()
+
+    cart_page.wait_items_loaded()
+    cart_page.check_loaded()
+
+    return cart_page, product1, product2
+
+
 
 
 

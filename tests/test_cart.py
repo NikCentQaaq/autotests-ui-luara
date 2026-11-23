@@ -38,8 +38,9 @@ class TestCart:
 
         cart_page.check_added_product(product=product)
 
-
-
+    @allure.story(AllureStory.ADD_TO_CART)
+    @allure.title("Добавление двух товаров в корзину")
+    @pytest.mark.smoke
     def test_add_2_product_to_cart(self, opened_catalog_page: CatalogPage, product_page: ProductPage, cart_page: CartPage):
 
         opened_catalog_page.open_product_card_by_index(index=5)
@@ -74,17 +75,57 @@ class TestCart:
 
 
 
+    @allure.story(AllureStory.DELETE_PRODUCT)
+    @allure.title("Удаление одного из двух товаров из корзины")
+    @pytest.mark.regression
+    def test_delete_one_of_two_products(self, cart_two_product: CartPage):
+        cart_page, product1, product2 = cart_two_product
+
+        cart_page.delete_item_by_articul(product1['articul'])
+
+        cart_page.header.check_quantity(1)
+        cart_page.check_products([product2])
+
+        cart_page.check_total_quantity()
+
+    @allure.story(AllureStory.CHANGE_QUANTITY)
+    @allure.title("Увеличение количества одного товара не изменяет второй товар")
+    @pytest.mark.regression
+    def test_plus_quantity_first_product_not_affect_second(self, cart_two_product: CartPage):
+        cart_page, product1, product2 = cart_two_product
+
+        cart_page.plus_quantity_by_articul(product1['articul'])
+        cart_page.check_quantity_by_articul(product1["articul"], 2)
+
+        cart_page.check_added_product_by_articul(product2)
+        cart_page.header.check_quantity(3)
+        cart_page.check_total_quantity()
 
 
 
+    @allure.story(AllureStory.CART_PRICE)
+    @allure.title("Пересчет общей стоимости корзины после увеличения количества одного из двух товаров")
+    @pytest.mark.regression
+    def test_cart_price_after_plus_quantity_with_two_products(self, cart_two_product: CartPage):
+        cart_page, product1, product2 = cart_two_product
+
+        cart_page.plus_quantity_by_articul(product1['articul'])
+        expected = (product1["price"] *2 + product2["price"])
+
+        cart_page.check_total_price(expected)
 
 
 
+    def test_cart_save_after_refresh(self, cart_two_product: CartPage):
+        cart_page, product1, product2 = cart_two_product
 
+        cart_page.reload()
+        cart_page.check_loaded()
 
+        cart_page.check_products([product1, product2])
 
-
-
+        cart_page.header.check_quantity(2)
+        cart_page.check_total_quantity()
 
 
 
