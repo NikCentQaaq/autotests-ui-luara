@@ -211,4 +211,4 @@ class CartPage(BasePage):
         for product in expected_products:
             self.check_added_product_by_articul(product)
 
-
+# git
