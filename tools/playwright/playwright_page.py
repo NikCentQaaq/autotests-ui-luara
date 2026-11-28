@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import allure
 from playwright.sync_api import Playwright, Page
 from pytest_playwright.pytest_playwright import browser_type
@@ -11,6 +13,7 @@ def initialize_playwright_page(
         playwright: Playwright,
         browser_type: Browser,
         test_name: str,
+        request,
         storage_state: str | None = None
 ) -> Page:
     """
@@ -24,7 +27,8 @@ def initialize_playwright_page(
 
     После завершения теста:
     - сохраняет trace и видео;
-    - прикладывает артефакты к отчету Allure;
+    - прикладывает их к Allure только при падении теста;
+    - удаляет артефакты успешных тестов;
     - закрывает браузер.
     """
 
@@ -39,12 +43,28 @@ def initialize_playwright_page(
 
     yield page
 
-    context.tracing.stop(path=settings.tracing_dir.joinpath(f'{test_name}.zip'))
+    trace_path = settings.tracing_dir.joinpath(f'{test_name}.zip')
+    context.tracing.stop(path=trace_path)
+
+    video_path = Path(page.video.path())
+
     browser.close()
 
-    allure.attach.file(settings.tracing_dir.joinpath(f'{test_name}.zip'), name='trace', extension='zip')
-    allure.attach.file(page.video.path(), name='video', attachment_type=allure.attachment_type.WEBM)
+    # Прикладывать артефакты, если тест упал
+    if request.node.rep_call.failed:
 
+        allure.attach.file(trace_path, name="trace", extension="zip")
+        allure.attach.file(video_path, name="video", attachment_type=allure.attachment_type.WEBM)
+
+    else:
+        trace_path.unlink(missing_ok=True)
+        video_path.unlink(missing_ok=True)
+
+
+
+
+    # allure.attach.file(settings.tracing_dir.joinpath(f'{test_name}.zip'), name='trace', extension='zip')
+    # allure.attach.file(page.video.path(), name='video', attachment_type=allure.attachment_type.WEBM)
 
 
 
