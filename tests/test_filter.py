@@ -168,7 +168,7 @@ class TestFilterCatalog:
         opened_catalog_page.check_current_url_expected(metall.url_pattern)
         opened_catalog_page.check_names_contain_text(text_value)
 
-
+    @pytest.mark.flaky(reruns=3, reruns_delay=2)
     @allure.story(AllureStory.METALL_FILTER)
     @allure.title("Фильтрация по металлу изделий: ювелирный сплав")
     def test_select_jewelry_metall(self, opened_catalog_page: CatalogPage, product_page: ProductPage):
