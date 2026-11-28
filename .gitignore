@@ -10,3 +10,4 @@ allure-report
 *.json
 videos
 tracing
+.DS_Store
