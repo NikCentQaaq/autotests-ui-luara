@@ -51,27 +51,34 @@ class SizeProductComponent(BaseComponent):
     def select_size_if_needed(self):
         count = self.size.count()
 
+        # Размеров нет — выбор не требуется
         if count == 0:
             return
 
-        if self.active_size.count() == 1:
-            with allure.step(f'Размер "{self.get_selected_size()}" уже выбран'):
-                return
-
+        # Единственный размер выбирается сайтом автоматически
         if count == 1:
-            self.select_size(self.size.first)
+            expect(self.active_size).to_have_count(1)
             return
 
+        # Один из нескольких размеров уже выбран
+        if self.active_size.count() == 1:
+            with allure.step(
+                    f'Размер "{self.get_selected_size()}" уже выбран'
+            ):
+                return
+
+        # Несколько размеров, ни один не выбран
         self.select_random_size()
 
 
-    def select_size(self, size):
+def select_size(self, size):
         expect(size).to_be_visible()
         expect(size).to_be_enabled()
 
         selected_size = size.inner_text().strip()
 
         with allure.step(f'Выбран размер "{selected_size}"'):
+
             size.click()
 
             expect(size).to_have_class(re.compile(r"\bactive\b"))

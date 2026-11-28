@@ -29,6 +29,20 @@ class ConcernCatalogComponent(BaseComponent):
     def check_visible_5_cards(self):
         self.container.check_visible()
         expect(self.cards).to_have_count(7)
+
+        for i in range(self.cards.count()):
+            card = self.cards.nth(i)
+
+            print(f"\n========== КАРТОЧКА {i + 1} ==========")
+            print("Текст:", card.inner_text())
+            print("HTML:", card.evaluate("(el) => el.outerHTML"))
+            print(
+                "Количество элементов count:",
+                card.locator("span.concern-card_count").count()
+            )
+
+
+
         for i in range(5):  # отображается 4 элемента
             CardConcernComponent(self.page, self.cards.nth(i)).check_elements()
 

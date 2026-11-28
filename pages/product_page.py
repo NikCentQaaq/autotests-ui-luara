@@ -126,11 +126,8 @@ class ProductPage(BasePage):
         metall = self.metall.get_text().strip()
         return metall
 
-
-    @allure.step("Раскрыть характеристики")
     @allure.step("Раскрыть характеристики")
     def open_characteristics_product(self):
-# Флакает именно на CI
         button = self.characteristic_button.get_locator()
         panel = self.characteristics_panel.get_locator()
 
@@ -141,7 +138,6 @@ class ProductPage(BasePage):
 
         if not panel.is_visible():
             button.click()
-
             expect(panel).to_be_visible(timeout=10000)
 
         self.metall.check_visible()
@@ -167,7 +163,6 @@ class ProductPage(BasePage):
     @allure.step('Возвращение назад на страницу каталога')
     def back_to_catalog_page(self):
         self.go_back()
-        self.check_loaded()
 
 
 

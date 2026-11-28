@@ -11,6 +11,7 @@ def page(request: SubRequest, playwright: Playwright) -> Page:
     yield from initialize_playwright_page(
         playwright=playwright,
         test_name=request.node.name,
-        browser_type=request.param
+        browser_type=request.param,
+        request=request
     )
 

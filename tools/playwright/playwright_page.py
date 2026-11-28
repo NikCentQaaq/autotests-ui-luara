@@ -51,7 +51,9 @@ def initialize_playwright_page(
     browser.close()
 
     # Прикладывать артефакты, если тест упал
-    if request.node.rep_call.failed:
+    rep_call = getattr(request.node, "rep_call", None)
+
+    if rep_call is not None and rep_call.failed:
 
         allure.attach.file(trace_path, name="trace", extension="zip")
         allure.attach.file(video_path, name="video", attachment_type=allure.attachment_type.WEBM)
